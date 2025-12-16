@@ -30,22 +30,22 @@
 
                 <ImageView
                     android:id="@+id/searchicon"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="58dp"
+                    android:layout_height="39dp"
                     android:src="@drawable/ic_search" />
 
                 <EditText
                     android:id="@+id/et_search"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:hint="Cari Tugas"
-                    android:textColorHint="@color/dark_grey"
                     android:fontFamily="@font/intersemibold"
-                    android:textColor="@color/black"
+                    android:hint="Cari Tugas:"
                     android:paddingStart="12dp"
-                    android:textSize="16sp" />
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/dark_grey"
+                    android:textSize="20sp" />
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
