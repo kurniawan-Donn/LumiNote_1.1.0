@@ -1,148 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    tools:context=".MainActivity">
 
-    <!-- ===== HEADER ===== -->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/header"
+        android:id="@+id/headerBar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:elevation="4dp"
         android:background="@android:color/white"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <!-- Back -->
-
-        <!-- Title -->
-
-        <!-- Save -->
-
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="JUDUL CATATAN"
-            android:textColor="@android:color/black"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.468"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.529" />
-
-        <TextView
-            android:id="@+id/btnSave"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="28dp"
-            android:text="Simpan"
-            android:textColor="@android:color/black"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.567" />
+        android:elevation="2dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="107dp">
 
         <ImageView
-            android:id="@+id/btnBack"
-            android:layout_width="51dp"
-            android:layout_height="51dp"
-            android:padding="8dp"
-            app:srcCompat="@drawable/ic_panah"
-            tools:layout_editor_absoluteX="4dp"
-            tools:layout_editor_absoluteY="4dp" />
+            android:id="@+id/backButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="4dp"
+            android:contentDescription="Tombol Kembali"
+            android:padding="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_panah" />
+
+        <TextView
+            android:id="@+id/noteTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="JUDUL CATATAN "
+            android:gravity="center_horizontal"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/saveButton"
+            app:layout_constraintHorizontal_bias="0.20"
+            app:layout_constraintStart_toEndOf="@id/backButton"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/saveButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="4dp"
+            android:contentDescription="Tombol Simpan"
+            android:padding="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_centang" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Divider -->
-    <View
+    <ScrollView
+        android:id="@+id/noteScrollView"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#DDDDDD"
-        app:layout_constraintTop_toBottomOf="@id/header"/>
-
-    <!-- ===== DATE & TIME ===== -->
-    <TextView
-        android:id="@+id/tvDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="AGUSTUS 10 2025\n10.00"
-        android:textSize="11sp"
-        android:textColor="#888888"
-        android:gravity="center"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/header"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <!-- ===== NOTE CONTENT ===== -->
-    <EditText
-        android:id="@+id/etNote"
-        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:hint="Silahkan menulis di sini"
-        android:gravity="top"
-        android:background="@null"
-        android:padding="16dp"
-        android:textSize="14sp"
-        app:layout_constraintTop_toBottomOf="@id/tvDate"
-        app:layout_constraintBottom_toTopOf="@id/formatBar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:layout_constraintBottom_toTopOf="@id/bottomToolbar"
+        app:layout_constraintTop_toBottomOf="@id/headerBar">
 
-    <!-- ===== FORMAT BAR ===== -->
-    <LinearLayout
-        android:id="@+id/formatBar"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:orientation="horizontal"
-        android:background="#E6EEF2"
-        android:gravity="center"
+        <LinearLayout
+            android:id="@+id/contentLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+            <TextView
+                android:id="@+id/dateTimeText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center_horizontal"
+                android:text="AGUSTUS 10 2025\n10.00"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/transparent"
+                android:hint="Silahkan menulis di sini"
+                android:inputType="textMultiLine|textCapSentences"
+                android:textSize="16sp"
+                android:textColor="@android:color/black" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottomToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#BCCCDC"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
-            android:id="@+id/btnBold"
+            android:id="@+id/boldButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="16dp"
             android:text="B"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <TextView
-            android:id="@+id/btnItalic"
+            android:id="@+id/italicButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="I"
+            android:textSize="24sp"
             android:textStyle="italic"
-            android:textSize="18sp"
-            android:padding="16dp"/>
+            android:textColor="@android:color/black"
+            app:layout_constraintStart_toEndOf="@id/boldButton"
+            app:layout_constraintHorizontal_bias="0.25"
+            app:layout_constraintEnd_toStartOf="@id/underlineButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <TextView
-            android:id="@+id/btnUnderline"
+            android:id="@+id/underlineButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="U"
-            android:textSize="18sp"
-            android:padding="16dp"/>
+            android:textSize="24sp"
+            android:textColor="@android:color/black"
+            android:textDecoration="underline"
+            app:layout_constraintStart_toEndOf="@id/italicButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@id/listButton"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
-        <TextView
-            android:id="@+id/btnBullet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="≡"
-            android:textSize="18sp"
-            android:padding="16dp"/>
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/listButton"
+            android:layout_width="48dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="48dp"
+            android:padding="12dp"
+            android:contentDescription="Tombol Daftar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_bullet_list_" />
 
+        <androidx.constraintlayout.helper.widget.Flow
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:constraint_referenced_ids="boldButton,italicButton,underlineButton,listButton"
+            app:flow_horizontalStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
