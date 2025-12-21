@@ -21,6 +21,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:paddingStart="0dp"
+            android:paddingEnd="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/ic_edit_catatan"
             app:layout_constraintHorizontal_bias="0.0"
@@ -37,7 +39,8 @@
                 android:fontFamily="@font/interbold"
                 android:textColor="@android:color/black"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:maxLines="1"/>
 
             <!-- Deskripsi -->
             <TextView
@@ -46,9 +49,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/interbold"
-                android:text="• Deskripsi"
+                android:text="Deskripsi"
                 android:textColor="@android:color/black"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:maxLines="1"/>
 
             <!-- Tanggal -->
 
@@ -62,18 +66,18 @@
             android:text="12/12/2005"
             android:textColor="@android:color/black"
             android:fontFamily="@font/interbold"
-            android:textSize="11sp"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
         <!-- Icon Edit -->
         <ImageView
             android:id="@+id/ic_edit_catatan"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginEnd="8dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/edit"
-            android:padding="4dp"
+            android:padding="0dp"
             android:src="@drawable/ic_edit"
             app:layout_constraintEnd_toStartOf="@id/ic_hapus_catatan"
             app:layout_constraintTop_toTopOf="parent"
@@ -82,11 +86,11 @@
         <!-- Icon Hapus -->
         <ImageView
             android:id="@+id/ic_hapus_catatan"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/hapus"
-            android:padding="4dp"
+            android:padding="0dp"
             android:src="@drawable/ic_delete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

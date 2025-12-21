@@ -57,18 +57,17 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_centang" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
     <ScrollView
         android:id="@+id/noteScrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        app:layout_constraintBottom_toTopOf="@id/bottomToolbar"
-        app:layout_constraintTop_toBottomOf="@id/headerBar">
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/headerBar"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
-            android:id="@+id/contentLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -79,32 +78,25 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:gravity="center_horizontal"
-                android:text="AGUSTUS 10 2025\n10.00"
+                android:text="Tanggal\n Waktu"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/noteContent" android:layout_width="match_parent"
+                android:id="@+id/noteContent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="@android:color/transparent"
-                android:hint="Silahkan menulis di sini"
+                android:hint="Silakan menulis disini"
                 android:inputType="textMultiLine|textCapSentences"
-                android:textSize="16sp"
-                android:textColor="@android:color/black" />
+                android:minLines="10"
+                android:gravity="top"
+                android:scrollbars="vertical"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
 
         </LinearLayout>
     </ScrollView>
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/bottomToolbar"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#BCCCDC"
-        android:paddingStart="32dp"
-        android:paddingEnd="32dp"
-        app:layout_constraintBottom_toBottomOf="parent">
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
