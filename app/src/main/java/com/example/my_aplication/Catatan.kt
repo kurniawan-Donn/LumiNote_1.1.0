@@ -2,38 +2,38 @@ package com.example.my_aplication
 
 import java.util.UUID
 
-/**
- * Data class untuk menyimpan satu catatan
- */
 data class Catatan(
-    val id: String = UUID.randomUUID().toString(),      // ID unik catatan
-    val judul: String,                                  // Judul catatan
-    val deskripsi: String,                              // Deskripsi singkat
-    val note: String,                                   // Isi catatan
-    val tanggal: String? = null,                        // Tanggal (opsional)
-    val waktu: String? = null,                          // Waktu (opsional)
-    val timestamp: Long = System.currentTimeMillis()    // Waktu dibuat/diupdate
+    val id: String = UUID.randomUUID().toString(),
+    val judul: String,
+    val deskripsi: String,
+    val note: String,
+    val tanggal: String? = null,
+    val waktu: String? = null,
+    val timestamp: Long = System.currentTimeMillis()
 ) {
-
-    /**
-     * Menggabungkan tanggal dan waktu untuk tampilan
-     */
-    fun getDisplayDateTime(): String {
-        return when {
-            tanggal != null && waktu != null -> "$tanggal\n$waktu"
-            tanggal != null -> tanggal
-            waktu != null -> waktu
-            else -> ""
-        }
+    // Helper function untuk mendapatkan tanggal & waktu dalam format display
+    fun getFormatTanggal(): String {
+        // Jika ada tanggal dan waktu
+        if (tanggal != null && waktu != null) { return "$tanggal\n$waktu" }
+        if (tanggal != null) { return tanggal }
+        if (waktu != null) { return waktu }
+        return ""
     }
 
-    /**
-     * Digunakan untuk fitur pencarian catatan
-     */
-    fun matchesQuery(query: String): Boolean {
-        val keyword = query.lowercase()
-        return judul.lowercase().contains(keyword) ||
-                deskripsi.lowercase().contains(keyword) ||
-                note.lowercase().contains(keyword)
+
+    // Helper function untuk search/filter
+    fun querypencocokan(query: String): Boolean {
+        // Ubah query menjadi huruf kecil biar pencarian tidak case‑sensitive
+        val searchText = query.lowercase()
+        // Ubah judul dan deskripsi jadi huruf kecil juga
+        val titleText = judul.lowercase()
+        val descriptionText = deskripsi.lowercase()
+        // Cek apakah judul berisi query
+        val containsInTitle = titleText.contains(searchText)
+        // Cek apakah deskripsi berisi query
+        val containsInDescription = descriptionText.contains(searchText)
+        // Kalau salah satu ada yang cocok, kembalikan true
+        return containsInTitle || containsInDescription
     }
+
 }
