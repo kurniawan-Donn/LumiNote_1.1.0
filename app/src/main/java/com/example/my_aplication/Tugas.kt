@@ -3,22 +3,22 @@ package com.example.my_aplication
 import java.util.UUID
 
 data class Tugas(
-    val id: String = UUID.randomUUID().toString(), // ID unik
-    val judul: String,                              // tugas_judul
-    val deskripsi: String = "",                     // tugas_deskripsi
-    val tanggal: String? = null,                    //  tgl tugas
-    val waktu: String? = null,                      // waktu deadline
-    val isSelesai: Boolean = false,                 // CheckBox centang
-    val timestamp: Long = System.currentTimeMillis() // waktu buat / update
+    val id: String = UUID.randomUUID().toString(),
+    val judul: String,
+    val deskripsi: String = "",
+    val tanggal: String? = null,
+    val waktu: String? = null,
+    val isSelesai: Boolean = false,
+    val timestamp: Long = System.currentTimeMillis()
 ) {
-
-    // Untuk menampilkan status checklist
     fun isChecked(): Boolean = isSelesai
 
-    // Helper untuk search
-    fun matchesQuery(query: String): Boolean {
-        val q = query.lowercase()
-        return judul.lowercase().contains(q) ||
-                deskripsi.lowercase().contains(q)
+    fun matchesQuery(katakunci: String): Boolean
+    {   val kata = katakunci.lowercase()
+        val judulLower = judul.lowercase()
+        val deskripsiLower = deskripsi.lowercase()
+        val cocokDiJudul = judulLower.contains(kata)
+        val cocokDiDeskripsi = deskripsiLower.contains(kata)
+        return cocokDiJudul || cocokDiDeskripsi
     }
 }
