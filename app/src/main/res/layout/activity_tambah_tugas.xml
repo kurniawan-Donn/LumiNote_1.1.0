@@ -58,13 +58,13 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/judul_catatan"
+                        android:text="@string/judul_tugas"
                         android:textColor="@color/text_primary"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/et_judul"
+                        android:id="@+id/et_judul_tugas"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
@@ -119,7 +119,7 @@
 
                     <!-- Pilih Tanggal -->
                     <LinearLayout
-                        android:id="@+id/layout_tanggal"
+                        android:id="@+id/layout_tanggal_tugas"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="?attr/selectableItemBackground"
@@ -130,11 +130,11 @@
                         android:paddingVertical="8dp">
 
                         <TextView
-                            android:id="@+id/tv_tanggal"
+                            android:id="@+id/tv_tanggal_tugas"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@string/pilih_tanggal_waktu"
+                            android:text="@string/pilih_tanggal"
                             android:textColor="@color/text_hint"
                             android:textSize="14sp" />
 
@@ -142,7 +142,7 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_calender"
-                            android:contentDescription="@string/pilih_tanggal_waktu" />
+                            android:contentDescription="@string/pilih_tanggal" />
                     </LinearLayout>
 
                     <View
@@ -152,7 +152,7 @@
 
                     <!-- Pilih Waktu -->
                     <LinearLayout
-                        android:id="@+id/layout_waktu"
+                        android:id="@+id/layout_waktu_tugas"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -164,7 +164,7 @@
                         android:paddingVertical="8dp">
 
                         <TextView
-                            android:id="@+id/tv_waktu"
+                            android:id="@+id/tv_waktu_tugas"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -181,6 +181,7 @@
 
                     <View
                         android:layout_width="match_parent"
+                        android:layout_marginTop="2dp"
                         android:layout_height="1dp"
                         android:background="@color/text_hint" />
 
@@ -199,14 +200,14 @@
 
             <!-- Button Tambahkan -->
             <Button
-                android:id="@+id/btn_Lanjut"
+                android:id="@+id/btn_simpan"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="16dp"
                 android:backgroundTint="@color/bottom_nav_color"
                 android:padding="16dp"
-                android:text="@string/lanjut"
+                android:text="@string/simpan"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:fontFamily="@font/interbold"
