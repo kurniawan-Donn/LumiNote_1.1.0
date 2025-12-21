@@ -50,12 +50,12 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.navigation_catatan -> {
                     navController.navigate(R.id.navigation_catatan)
-                    mainHeader.text = "Daftar Catatan"
+                    mainHeader.text = getString(R.string.daftar_catatan)
                     true
                 }
                 R.id.navigation_tugas -> {
                     navController.navigate(R.id.navigation_tugas)
-                    mainHeader.text = "Daftar Tugas"
+                    mainHeader.text = getString(R.string.daftar_tugas)
                     true
                 }
                 R.id.navigation_plus -> {
@@ -78,8 +78,8 @@ class MainActivity : AppCompatActivity() {
         // Update header text based on selected item
         bottomNav.setOnItemReselectedListener { item ->
             when (item.itemId) {
-                R.id.navigation_catatan -> mainHeader.text = "Daftar Catatan"
-                R.id.navigation_tugas -> mainHeader.text = "Daftar Tugas"
+                R.id.navigation_catatan -> mainHeader.text = getString(R.string.daftar_catatan)
+                R.id.navigation_tugas -> mainHeader.text = getString(R.string.daftar_tugas)
             }
         }
     }

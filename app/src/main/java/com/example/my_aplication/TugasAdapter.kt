@@ -15,7 +15,7 @@ class TugasAdapter(
     private val onCheckedChange: (Tugas, Boolean) -> Unit
 ) : RecyclerView.Adapter<TugasAdapter.TugasViewHolder>() {
     // ViewHolder
-    inner class TugasViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class TugasViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val checkbox: CheckBox = itemView.findViewById(R.id.centang)
         val judul: TextView = itemView.findViewById(R.id.tugas_judul)
         val deskripsi: TextView = itemView.findViewById(R.id.tugas_deskripsi)

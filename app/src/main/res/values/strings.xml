@@ -4,6 +4,10 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
 
+        <!-- Header Navigation -->
+        <string name="header_catatan">Daftar Catatan</string>
+        <string name="header_tugas">Daftar Tugas</string>
+
         <!-- Bottom Navigation -->
         <string name="title_catatan">Catatan</string>
         <string name="title_plus">Plus</string>

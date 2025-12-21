@@ -92,10 +92,12 @@ class CatatanActivity : AppCompatActivity() {
 
 
             // Tampilkan tanggal & waktu jika ada
+            val tanggalText = tanggal ?: ""
+            val waktuText = waktu ?: ""
             dateTimeText.text = when {
-                tanggal != null && waktu != null -> "$tanggal\n$waktu"
-                tanggal != null -> tanggal
-                waktu != null -> waktu
+                tanggalText.isNotEmpty() && waktuText.isNotEmpty() -> "$tanggalText\n$waktuText"
+                tanggalText.isNotEmpty() -> tanggalText
+                waktuText.isNotEmpty() -> waktuText
                 else -> "Tanpa tanggal & waktu"
             }
         }

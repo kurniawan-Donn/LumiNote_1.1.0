@@ -22,8 +22,8 @@ class TambahCatatanActivity : AppCompatActivity() {
     private lateinit var btnLanjut: Button
     private lateinit var etDeskripsiPreview : EditText
 
-    private var selectedTanggal: String? = null
-    private var selectedWaktu: String? = null
+    private var tanggalDipilih: String? = null
+    private var waktuDipilih: String? = null
 
     // ===============================
     // Variable untuk mode Edit - TAMBAHKAN INI
@@ -59,72 +59,59 @@ class TambahCatatanActivity : AppCompatActivity() {
         setupLanjutButton()
     }
 
-
-    // ===============================
-// Cek apakah ini mode Edit - TAMBAHKAN FUNGSI INI
-// ===============================
+    // Cek apakah ini mode Edit - TAMBAHKAN FUNGSI INI
     private fun checkEditMode() {
-        // Ambil data dari Intent
         val id = intent.getStringExtra("id")
-        val judul = intent.getStringExtra("judul")
-        val deskripsi = intent.getStringExtra("deskripsi")
-        val tanggal = intent.getStringExtra("tanggal")
-        val waktu = intent.getStringExtra("waktu")
-        val note = intent.getStringExtra("note")
 
-        // Jika ada ID, berarti ini mode Edit
         if (id != null) {
             isEditMode = true
             editCatatanId = id
-            editNote = note
 
-            // Isi form dengan data yang ada
-            etJudul.setText(judul)
-            etDeskripsiPreview.setText(deskripsi)
-
-            if (tanggal != null) {
-                selectedTanggal = tanggal
-                tvTanggal.text = tanggal
+            // Ambil catatan lengkap dari preferences
+            val catatanPref = CatatanPreferences(this)
+            val catatan = catatanPref.getCatatanById(id)
+            if (catatan != null) {
+                etJudul.setText(catatan.judul)
+                etDeskripsiPreview.setText(catatan.deskripsi)
+                tanggalDipilih = catatan.tanggal
+                tvTanggal.text = tanggalDipilih
+                waktuDipilih = catatan.waktu
+                tvWaktu.text = waktuDipilih
+                editNote = catatan.note
             }
 
-            if (waktu != null) {
-                selectedWaktu = waktu
-                tvWaktu.text = waktu
-            }
-
-            // Ubah text tombol menjadi "Update"
-            btnLanjut.text = "Update"
+            btnLanjut.text = getString(R.string.simpan)
         } else {
-            // Mode Tambah Baru
             isEditMode = false
-            btnLanjut.text = "Lanjut"
+            btnLanjut.text = getString(R.string.lanjut)
         }
     }
 
+
     private fun setupDatePicker() {
         layoutTanggal.setOnClickListener {
-            val calendar = Calendar.getInstance()
-            val year = calendar.get(Calendar.YEAR)
-            val month = calendar.get(Calendar.MONTH)
-            val day = calendar.get(Calendar.DAY_OF_MONTH)
+            val kalender = Calendar.getInstance()
+            val tahun = kalender.get(Calendar.YEAR)
+            val bulan = kalender.get(Calendar.MONTH)
+            val hari = kalender.get(Calendar.DAY_OF_MONTH)
 
-            DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
-                selectedTanggal = String.format("%02d/%02d/%04d", selectedDay, selectedMonth + 1, selectedYear)
-                tvTanggal.text = selectedTanggal
-            }, year, month, day).show()
+            DatePickerDialog(this, { _, y, m, d ->
+                tanggalDipilih = String.format("%02d/%02d/%04d", d, m + 1, y)
+                tvTanggal.text = tanggalDipilih
+            }, tahun, bulan, hari).show()
         }
     }
 
     private fun setupTimePicker() {
         layoutWaktu.setOnClickListener {
-            val calendar = Calendar.getInstance()
-            val hour = calendar.get(Calendar.HOUR_OF_DAY)
-            val minute = calendar.get(Calendar.MINUTE)
+            val kalender = Calendar.getInstance()
+            val jam = kalender.get(Calendar.HOUR_OF_DAY)
+            val menit = kalender.get(Calendar.MINUTE)
 
-            TimePickerDialog(this, { _, selectedHour, selectedMinute ->
-                selectedWaktu = String.format("%02d:%02d", selectedHour, selectedMinute)
-                tvWaktu.text = selectedWaktu
-            }, hour, minute, true).show()
+            TimePickerDialog(this, { _, h, m ->
+                waktuDipilih = String.format("%02d:%02d", h, m)
+                tvWaktu.text = waktuDipilih
+            }, jam, menit, true).show()
         }
     }
 
@@ -138,39 +125,31 @@ class TambahCatatanActivity : AppCompatActivity() {
                 Toast.makeText(this, "Judul tidak boleh kosong", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-
-            // ===============================
-            // Cek mode: Edit atau Tambah
-            // ===============================
             if (isEditMode && editCatatanId != null) {
-                // ===============================
-                // MODE EDIT: Update catatan yang ada
-                // ===============================
-                val catatanPreferences = CatatanPreferences(this)
+                val catatanPref = CatatanPreferences(this)
                 val catatanUpdate = Catatan(
-                    id = editCatatanId!!, // Gunakan ID yang sama
+                    id = editCatatanId!!,
                     judul = judul,
                     deskripsi = deskripsi,
-                    note = editNote ?: "", // Pertahankan note lama
-                    tanggal = selectedTanggal,
-                    waktu = selectedWaktu,
+                    note = editNote?: "",
+                    tanggal = tanggalDipilih,
+                    waktu = waktuDipilih,
                     timestamp = System.currentTimeMillis()
                 )
-
-                // Update ke preferences
-                catatanPreferences.updateCatatan(catatanUpdate)
+                catatanPref.updateCatatan(catatanUpdate)
                 Toast.makeText(this, "Catatan berhasil diupdate", Toast.LENGTH_SHORT).show()
                 finish()
-
-            } else {
+            }
+            else {
                 // ===============================
                 // MODE TAMBAH: Pindah ke CatatanActivity untuk isi note
                 // ===============================
                 val intent = Intent(this, CatatanActivity::class.java).apply {
                     putExtra("judul", judul)
                     putExtra("deskripsi", deskripsi)
-                    putExtra("tanggal", selectedTanggal)
-                    putExtra("waktu", selectedWaktu)
+                    putExtra("tanggal", tanggalDipilih)
+                    putExtra("waktu", waktuDipilih)
+                    putExtra("note", editNote)
                 }
                 startActivity(intent)
                 finish()

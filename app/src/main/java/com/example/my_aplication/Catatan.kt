@@ -6,7 +6,7 @@ data class Catatan(
     val id: String = UUID.randomUUID().toString(),
     val judul: String,
     val deskripsi: String,
-    val note: String,
+    val note: String? = null,
     val tanggal: String? = null,
     val waktu: String? = null,
     val timestamp: Long = System.currentTimeMillis()
