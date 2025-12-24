@@ -1,5 +1,5 @@
 // Deklarasi package untuk organisasi kode
-package com.example.my_aplication
+package com.example.LumiNote
 
 // Mengimpor DatePickerDialog untuk memilih tanggal dari kalender
 import android.app.DatePickerDialog

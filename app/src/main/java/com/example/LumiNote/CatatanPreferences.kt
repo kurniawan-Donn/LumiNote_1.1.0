@@ -1,5 +1,5 @@
 // Deklarasi package untuk organisasi kode
-package com.example.my_aplication
+package com.example.LumiNote
 
 // Mengimpor Context untuk mengakses resources dan sistem Android
 import android.content.Context

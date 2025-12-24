@@ -1,5 +1,5 @@
 // Deklarasi package untuk organisasi kode
-package com.example.my_aplication
+package com.example.LumiNote
 
 // Mengimpor kelas Activity sebagai target ekstensi fungsi
 import android.app.Activity

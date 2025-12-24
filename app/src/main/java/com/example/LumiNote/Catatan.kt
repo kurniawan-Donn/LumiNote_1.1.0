@@ -1,5 +1,5 @@
 // Deklarasi package untuk organisasi kode
-package com.example.my_aplication
+package com.example.LumiNote
 
 // Mengimpor UUID untuk menghasilkan identifier unik
 import java.util.UUID

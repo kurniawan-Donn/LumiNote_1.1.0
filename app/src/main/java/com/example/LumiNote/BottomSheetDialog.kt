@@ -1,5 +1,5 @@
 // Deklarasi package untuk organisasi kode
-package com.example.my_aplication
+package com.example.LumiNote
 
 // Mengimpor Intent untuk navigasi antar activity
 import android.content.Intent
@@ -16,8 +16,9 @@ import android.widget.Button
 // Mengimpor BottomSheetDialogFragment untuk dialog yang muncul dari bawah layar
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-// Deklarasi kelas PilihTipeBottomSheet yang mewarisi BottomSheetDialogFragment
-class PilihTipeBottomSheet : BottomSheetDialogFragment() {
+// Deklarasi kelas BottomSheetDialog yang mewarisi BottomSheetDialogFragment
+// Keterangan: Nama kelas ini generik "BottomSheetDialog" dan fungsinya sama persis dengan PilihTipeBottomSheet
+class BottomSheetDialog : BottomSheetDialogFragment() {
 
     // Fungsi yang dipanggil saat fragment membuat tampilan UI-nya
     override fun onCreateView(
@@ -45,7 +46,7 @@ class PilihTipeBottomSheet : BottomSheetDialogFragment() {
             // Menutup BottomSheetDialog saat tombol diklik
             dismiss()
 
-            // Membuat Intent untuk membuka TambahCatatanActivity
+            // Membuat Intent untuk membuka TambahCatatanActivity (form tambah catatan)
             val intent = Intent(requireContext(), TambahCatatanActivity::class.java)
             // Memulai activity baru
             startActivity(intent)
@@ -56,7 +57,7 @@ class PilihTipeBottomSheet : BottomSheetDialogFragment() {
             // Menutup BottomSheetDialog saat tombol diklik
             dismiss()
 
-            // Membuat Intent untuk membuka TambahTugasActivity
+            // Membuat Intent untuk membuka TambahTugasActivity (form tambah tugas)
             val intent = Intent(requireContext(), TambahTugasActivity::class.java)
             // Memulai activity baru
             startActivity(intent)

@@ -1,4 +1,4 @@
-package com.example.my_aplication
+package com.example.LumiNote
 
 // Mengimpor kelas Bundle untuk menyimpan state aktivitas
 import android.os.Bundle

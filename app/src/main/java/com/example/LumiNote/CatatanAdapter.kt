@@ -1,5 +1,5 @@
 // Deklarasi package untuk organisasi kode
-package com.example.my_aplication
+package com.example.LumiNote
 
 // Mengimpor LayoutInflater untuk mengubah layout XML menjadi View
 import android.view.LayoutInflater

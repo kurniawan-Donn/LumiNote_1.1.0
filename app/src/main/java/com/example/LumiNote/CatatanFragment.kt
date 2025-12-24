@@ -1,5 +1,5 @@
 // Deklarasi package untuk organisasi kode
-package com.example.my_aplication
+package com.example.LumiNote
 
 // Mengimpor AlertDialog untuk menampilkan dialog konfirmasi
 import android.app.AlertDialog

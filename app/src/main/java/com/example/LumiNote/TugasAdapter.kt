@@ -1,4 +1,4 @@
-package com.example.my_aplication  // Mendeklarasikan package/namespace untuk aplikasi
+package com.example.LumiNote  // Mendeklarasikan package/namespace untuk aplikasi
 
 // ===============================
 // IMPORTS
