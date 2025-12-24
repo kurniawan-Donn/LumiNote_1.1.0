@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "my_aplication"
+rootProject.name = "LumiNote"
 include(":app")
  
