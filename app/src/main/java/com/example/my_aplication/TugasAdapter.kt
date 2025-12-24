@@ -1,72 +1,121 @@
-package com.example.my_aplication
+package com.example.my_aplication  // Mendeklarasikan package/namespace untuk aplikasi
 
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
+// ===============================
+// IMPORTS
+// ===============================
+import android.view.LayoutInflater  // Untuk mengubah XML layout menjadi View object
+import android.view.View  // Class dasar untuk komponen UI
+import android.view.ViewGroup  // Container untuk kumpulan View
+import android.widget.CheckBox  // Komponen checkbox untuk status selesai
+import android.widget.ImageView  // Komponen untuk menampilkan gambar/icon
+import android.widget.TextView  // Komponen untuk menampilkan teks
+import androidx.recyclerview.widget.RecyclerView  // Adapter untuk RecyclerView
 
+// ===============================
+// CLASS TUGAS ADAPTER
+// Adapter untuk RecyclerView yang menampilkan daftar tugas
+// ===============================
 class TugasAdapter(
-    private val listTugas: MutableList<Tugas>,
-    private val onEditClick: (Tugas) -> Unit,
-    private val onDeleteClick: (Tugas) -> Unit,
-    private val onCheckedChange: (Tugas, Boolean) -> Unit
-) : RecyclerView.Adapter<TugasAdapter.TugasViewHolder>() {
-    // ViewHolder
+    private val listTugas: MutableList<Tugas>,  // Daftar tugas yang akan ditampilkan (mutable/dapat diubah)
+    private val onEditClick: (Tugas) -> Unit,  // Lambda function untuk handle klik edit
+    private val onDeleteClick: (Tugas) -> Unit,  // Lambda function untuk handle klik hapus
+    private val onCheckedChange: (Tugas, Boolean) -> Unit  // Lambda function untuk handle perubahan checkbox
+) : RecyclerView.Adapter<TugasAdapter.TugasViewHolder>() {  // Extends RecyclerView.Adapter dengan ViewHolder kustom
+
+    // ===============================
+    // INNER CLASS TUGAS VIEW HOLDER
+    // Menyimpan referensi ke view components dalam setiap item list
+    // ===============================
     class TugasViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val checkbox: CheckBox = itemView.findViewById(R.id.centang)
-        val judul: TextView = itemView.findViewById(R.id.tugas_judul)
-        val deskripsi: TextView = itemView.findViewById(R.id.tugas_deskripsi)
-        val tanggal: TextView = itemView.findViewById(R.id.tgltugas)
-        val btnEdit: ImageView = itemView.findViewById(R.id.ic_edit_tugas)
-        val btnHapus: ImageView = itemView.findViewById(R.id.ic_hapus_tugas)
+        // Mendeklarasikan semua view yang ada dalam layout item_tugas.xml
+        val checkbox: CheckBox = itemView.findViewById(R.id.centang)  // Checkbox untuk status selesai
+        val judul: TextView = itemView.findViewById(R.id.tugas_judul)  // TextView untuk judul tugas
+        val deskripsi: TextView = itemView.findViewById(R.id.tugas_deskripsi)  // TextView untuk deskripsi tugas
+        val tanggal: TextView = itemView.findViewById(R.id.tgltugas)  // TextView untuk tanggal tugas
+        val btnEdit: ImageView = itemView.findViewById(R.id.ic_edit_tugas)  // ImageView untuk tombol edit
+        val btnHapus: ImageView = itemView.findViewById(R.id.ic_hapus_tugas)  // ImageView untuk tombol hapus
     }
-    // Inflate layout item
+
+    // ===============================
+    // METHOD onCreateViewHolder
+    // Dipanggil saat RecyclerView membutuhkan ViewHolder baru
+    // ===============================
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TugasViewHolder {
+        // Meng-inflate layout item_tugas.xml menjadi View object
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_tugas, parent, false)
-        return TugasViewHolder(view)
+        return TugasViewHolder(view)  // Mengembalikan ViewHolder baru dengan view yang sudah di-inflate
     }
-    override fun onBindViewHolder(holder: TugasViewHolder, position: Int) {
-        val tugas = listTugas[position]
 
-        // Set data
-        holder.judul.text = tugas.judul
-        holder.deskripsi.text = tugas.deskripsi
-        holder.tanggal.text = tugas.tanggal ?: ""
-        // Ubah warna jika tugas sudah selesai
+    // ===============================
+    // METHOD onBindViewHolder
+    // Dipanggil untuk mengisi data ke ViewHolder pada posisi tertentu
+    // ===============================
+    override fun onBindViewHolder(holder: TugasViewHolder, position: Int) {
+        val tugas = listTugas[position]  // Mendapatkan objek Tugas pada posisi tertentu
+
+        // ===============================
+        // SET DATA KE VIEW COMPONENTS
+        // ===============================
+        holder.judul.text = tugas.judul  // Meng-set teks judul dari objek Tugas
+        holder.deskripsi.text = tugas.deskripsi  // Meng-set teks deskripsi
+        holder.tanggal.text = tugas.tanggal ?: ""  // Meng-set teks tanggal, jika null gunakan string kosong
+
+        // ===============================
+        // UBAH WARNA BERDASARKAN STATUS SELESAI
+        // ===============================
         if (tugas.isSelesai) {
+            // Jika tugas sudah selesai, gunakan warna abu-abu gelap
             holder.judul.setTextColor(holder.judul.context.getColor(android.R.color.darker_gray))
             holder.deskripsi.setTextColor(holder.deskripsi.context.getColor(android.R.color.darker_gray))
             holder.tanggal.setTextColor(holder.tanggal.context.getColor(android.R.color.darker_gray))
         } else {
-            // Warna normal
+            // Jika tugas belum selesai, gunakan warna hitam (default)
             holder.judul.setTextColor(holder.judul.context.getColor(android.R.color.black))
             holder.deskripsi.setTextColor(holder.deskripsi.context.getColor(android.R.color.black))
             holder.tanggal.setTextColor(holder.tanggal.context.getColor(android.R.color.black))
         }
-        // Checkbox selesai
-        holder.checkbox.setOnCheckedChangeListener(null)
-        holder.checkbox.isChecked = tugas.isChecked()
+
+        // ===============================
+        // HANDLE CHECKBOX STATUS SELESAI
+        // ===============================
+        holder.checkbox.setOnCheckedChangeListener(null)  // Remove listener sementara untuk menghindari loop
+        holder.checkbox.isChecked = tugas.isChecked()  // Set status checkbox berdasarkan data
         holder.checkbox.setOnCheckedChangeListener { _, isChecked ->
+            // Ketika checkbox diubah, panggil callback dengan objek Tugas dan status baru
             onCheckedChange(tugas, isChecked)
         }
-        // Klik edit
+
+        // ===============================
+        // HANDLE KLIK TOMBOL EDIT
+        // ===============================
         holder.btnEdit.setOnClickListener {
+            // Ketika tombol edit diklik, panggil callback dengan objek Tugas yang sesuai
             onEditClick(tugas)
         }
-        // Klik hapus
+
+        // ===============================
+        // HANDLE KLIK TOMBOL HAPUS
+        // ===============================
         holder.btnHapus.setOnClickListener {
+            // Ketika tombol hapus diklik, panggil callback dengan objek Tugas yang sesuai
             onDeleteClick(tugas)
         }
     }
-    override fun getItemCount(): Int = listTugas.size
-    // Helper update list (search / refresh)
+
+    // ===============================
+    // METHOD getItemCount
+    // Mengembalikan jumlah total item dalam daftar
+    // ===============================
+    override fun getItemCount(): Int = listTugas.size  // Mengembalikan ukuran listTugas
+
+    // ===============================
+    // METHOD updateData
+    // Helper method untuk memperbarui data adapter dengan daftar baru
+    // ===============================
     fun updateData(newList: List<Tugas>) {
-        listTugas.clear()
-        listTugas.addAll(newList)
-        notifyDataSetChanged()
+        listTugas.clear()  // Menghapus semua data lama dari list
+        listTugas.addAll(newList)  // Menambahkan semua data baru ke list
+        notifyDataSetChanged()  // Memberi tahu adapter bahwa data telah berubah (refresh UI)
     }
 }
