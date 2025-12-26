@@ -7,20 +7,48 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <TextView
-        android:id="@+id/main_header"
+    <!-- Header dengan ImageButton di dalamnya -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/header_color"
-        android:paddingStart="20dp"
-        android:paddingVertical="20dp"
-        android:text="Daftar Catatan"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:fontFamily="@font/interbold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Judul di tengah header -->
+        <TextView
+            android:id="@+id/main_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="20dp"
+            android:text="Daftar Catatan"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:fontFamily="@font/interbold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <!-- ImageButton di pojok kanan header -->
+        <ImageButton
+            android:id="@+id/btnToProfil"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="To Profile"
+            android:padding="0dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_to_profil"
+            android:scaleType="fitCenter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <!-- ===================== -->
     <!-- Fragment Container -->
     <!-- ===================== -->
@@ -31,7 +59,7 @@
         android:layout_height="0dp"
         app:defaultNavHost="true"
         app:navGraph="@navigation/mobile_navigation"
-        app:layout_constraintTop_toBottomOf="@id/main_header"
+        app:layout_constraintTop_toBottomOf="@id/header_container"
         app:layout_constraintBottom_toTopOf="@id/bottom_nav_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
