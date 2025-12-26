@@ -1,7 +1,14 @@
 package com.example.LumiNote
 
+import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Matrix
+import android.media.ExifInterface
+import android.net.Uri
 import android.os.Bundle
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -9,13 +16,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
-import com.google.android.material.button.MaterialButton
+import java.io.InputStream
 
 class ProfilActivity : AppCompatActivity() {
 
     // Views
     private lateinit var backButton: ImageView
-    private lateinit var btnEdit: MaterialButton
+    private lateinit var btnEdit: Button
     private lateinit var imgProfile: ImageView
     private lateinit var tvNama: TextView
     private lateinit var tvBio: TextView
@@ -35,14 +42,36 @@ class ProfilActivity : AppCompatActivity() {
     private lateinit var layoutBackup: LinearLayout
     private lateinit var layoutHapusData: LinearLayout
     private lateinit var layoutTentangKami: LinearLayout
+    private lateinit var layoutLogout: LinearLayout
+
+    private lateinit var userManager: UserManager
+    private lateinit var sessionManager: SessionManager
+
+    companion object {
+        private const val EDIT_PROFILE_REQUEST = 100
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profil)
 
-        initViews()
-        setupListeners()
-        loadUserData()
+        try {
+            initViews()
+            userManager = UserManager(this)
+            sessionManager = SessionManager(this)
+            loadUserData()
+            setupListeners()
+        } catch (e: Exception) {
+            Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_LONG).show()
+            e.printStackTrace()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == EDIT_PROFILE_REQUEST && resultCode == Activity.RESULT_OK) {
+            loadUserData()
+        }
     }
 
     private fun initViews() {
@@ -70,6 +99,7 @@ class ProfilActivity : AppCompatActivity() {
         layoutBackup = findViewById(R.id.layoutBackup)
         layoutHapusData = findViewById(R.id.layoutHapusData)
         layoutTentangKami = findViewById(R.id.layoutTentangKami)
+        layoutLogout = findViewById(R.id.layoutLogout)
     }
 
     private fun setupListeners() {
@@ -121,73 +151,175 @@ class ProfilActivity : AppCompatActivity() {
         layoutTentangKami.setOnClickListener {
             openTentangKami()
         }
+
+        // Logout
+        layoutLogout.setOnClickListener {
+            showLogoutDialog()
+        }
     }
 
     private fun loadUserData() {
-        // TODO: Load data dari SharedPreferences atau database
-        // Sementara menggunakan data default
-        tvNama.text = "Someone"
-        tvBio.text = "Deskripsi Bio..."
+        try {
+            val userId = sessionManager.getUserId()
+
+            if (userId != null) {
+                val user = userManager.getUserById(userId)
+                if (user != null) {
+                    // Update UI
+                    tvNama.text = user.nama
+                    tvBio.text = user.bio
+
+                    // Load foto profil dari internal storage
+                    if (user.fotoProfil.isNotEmpty()) {
+                        loadImageFromInternalStorage(user.fotoProfil)
+                    } else {
+                        imgProfile.setImageResource(R.drawable.ic_person)
+                    }
+                } else {
+                    Toast.makeText(this, "User tidak ditemukan", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(this, "Session tidak valid", Toast.LENGTH_SHORT).show()
+                finish()
+            }
+        } catch (e: Exception) {
+            Toast.makeText(this, "Error loading data: ${e.message}", Toast.LENGTH_LONG).show()
+            e.printStackTrace()
+        }
+    }
+
+    // ✅ Load image dari internal storage (file path)
+    private fun loadImageFromInternalStorage(filePath: String) {
+        try {
+            val bitmap = ImageHelper.loadImageFromInternalStorage(filePath)
+            if (bitmap != null) {
+                // Crop menjadi circular
+                val circularBitmap = getCircularBitmap(bitmap)
+                imgProfile.setImageBitmap(circularBitmap)
+            } else {
+                imgProfile.setImageResource(R.drawable.ic_person)
+            }
+        } catch (e: Exception) {
+            imgProfile.setImageResource(R.drawable.ic_person)
+            e.printStackTrace()
+        }
+    }
+
+    // ✅ Fungsi native untuk load dan crop circular image dari URI (untuk preview)
+    private fun loadCircularImageFromUri(uriString: String) {
+        try {
+            val uri = Uri.parse(uriString)
+            val inputStream: InputStream? = contentResolver.openInputStream(uri)
+
+            if (inputStream != null) {
+                var bitmap = BitmapFactory.decodeStream(inputStream)
+                inputStream.close()
+
+                // Rotate jika perlu (handle rotasi dari EXIF)
+                bitmap = rotateImageIfRequired(bitmap, uri)
+
+                // Crop menjadi circular
+                val circularBitmap = getCircularBitmap(bitmap)
+
+                imgProfile.setImageBitmap(circularBitmap)
+            } else {
+                imgProfile.setImageResource(R.drawable.ic_person)
+            }
+        } catch (e: Exception) {
+            imgProfile.setImageResource(R.drawable.ic_person)
+            e.printStackTrace()
+        }
+    }
+
+    // Fungsi untuk rotate image sesuai EXIF
+    private fun rotateImageIfRequired(bitmap: Bitmap, uri: Uri): Bitmap {
+        try {
+            val inputStream = contentResolver.openInputStream(uri)
+            val exif = inputStream?.let { ExifInterface(it) }
+            inputStream?.close()
+
+            val orientation = exif?.getAttributeInt(
+                ExifInterface.TAG_ORIENTATION,
+                ExifInterface.ORIENTATION_NORMAL
+            ) ?: ExifInterface.ORIENTATION_NORMAL
+
+            return when (orientation) {
+                ExifInterface.ORIENTATION_ROTATE_90 -> rotateImage(bitmap, 90f)
+                ExifInterface.ORIENTATION_ROTATE_180 -> rotateImage(bitmap, 180f)
+                ExifInterface.ORIENTATION_ROTATE_270 -> rotateImage(bitmap, 270f)
+                else -> bitmap
+            }
+        } catch (e: Exception) {
+            return bitmap
+        }
+    }
+
+    private fun rotateImage(bitmap: Bitmap, degrees: Float): Bitmap {
+        val matrix = Matrix()
+        matrix.postRotate(degrees)
+        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
+    }
+
+    // Fungsi untuk membuat circular bitmap
+    private fun getCircularBitmap(bitmap: Bitmap): Bitmap {
+        val size = Math.min(bitmap.width, bitmap.height)
+        val x = (bitmap.width - size) / 2
+        val y = (bitmap.height - size) / 2
+
+        val squaredBitmap = Bitmap.createBitmap(bitmap, x, y, size, size)
+        val output = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888)
+
+        val canvas = android.graphics.Canvas(output)
+        val paint = android.graphics.Paint()
+        val rect = android.graphics.Rect(0, 0, size, size)
+
+        paint.isAntiAlias = true
+        canvas.drawARGB(0, 0, 0, 0)
+        canvas.drawCircle(size / 2f, size / 2f, size / 2f, paint)
+
+        paint.xfermode = android.graphics.PorterDuffXfermode(android.graphics.PorterDuff.Mode.SRC_IN)
+        canvas.drawBitmap(squaredBitmap, rect, rect, paint)
+
+        return output
     }
 
     private fun openEditProfil() {
-        // TODO: Buka EditProfilActivity
-        Toast.makeText(this, "Edit Profil akan segera hadir", Toast.LENGTH_SHORT).show()
-        // val intent = Intent(this, EditProfilActivity::class.java)
-        // startActivity(intent)
+        try {
+            val intent = Intent(this, EditProfilActivity::class.java)
+            startActivityForResult(intent, EDIT_PROFILE_REQUEST)
+        } catch (e: Exception) {
+            Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun openFaforit() {
-        // TODO: Buka FaforitActivity
         Toast.makeText(this, "Faforit akan segera hadir", Toast.LENGTH_SHORT).show()
-        // val intent = Intent(this, FaforitActivity::class.java)
-        // startActivity(intent)
     }
 
     private fun openArsip() {
-        // TODO: Buka ArsipActivity
         Toast.makeText(this, "Arsip akan segera hadir", Toast.LENGTH_SHORT).show()
-        // val intent = Intent(this, ArsipActivity::class.java)
-        // startActivity(intent)
     }
 
     private fun openStatistik() {
-        // TODO: Buka StatistikActivity
         Toast.makeText(this, "Statistik akan segera hadir", Toast.LENGTH_SHORT).show()
-        // val intent = Intent(this, StatistikActivity::class.java)
-        // startActivity(intent)
     }
 
     private fun toggleModeGelap(isEnabled: Boolean) {
-        // TODO: Implementasi mode gelap
         val message = if (isEnabled) "Mode Gelap diaktifkan" else "Mode Gelap dinonaktifkan"
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-
-        // Simpan preferensi
-        // SharedPreferences logic here
     }
 
     private fun togglePemberitahuan(isEnabled: Boolean) {
-        // TODO: Implementasi notifikasi
         val message = if (isEnabled) "Pemberitahuan diaktifkan" else "Pemberitahuan dinonaktifkan"
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-
-        // Simpan preferensi
-        // SharedPreferences logic here
     }
 
     private fun showBahasaBottomSheet() {
-        // TODO: Show bottom sheet untuk pilih bahasa
         Toast.makeText(this, "Pilih Bahasa akan segera hadir", Toast.LENGTH_SHORT).show()
-        // val bottomSheet = BahasaBottomSheet()
-        // bottomSheet.show(supportFragmentManager, "BahasaBottomSheet")
     }
 
     private fun openBackupRestore() {
-        // TODO: Buka BackupRestoreActivity
         Toast.makeText(this, "Backup & Restore akan segera hadir", Toast.LENGTH_SHORT).show()
-        // val intent = Intent(this, BackupRestoreActivity::class.java)
-        // startActivity(intent)
     }
 
     private fun showHapusDataDialog() {
@@ -205,18 +337,37 @@ class ProfilActivity : AppCompatActivity() {
     }
 
     private fun hapusSemuaData() {
-        // TODO: Hapus semua data dari database dan preferences
         Toast.makeText(this, "Semua data telah dihapus", Toast.LENGTH_SHORT).show()
-
-        // Clear SharedPreferences
-        // Clear Database
-        // Reset to default values
     }
 
     private fun openTentangKami() {
-        // TODO: Buka TentangKamiActivity
         Toast.makeText(this, "Tentang Kami akan segera hadir", Toast.LENGTH_SHORT).show()
-        // val intent = Intent(this, TentangKamiActivity::class.java)
-        // startActivity(intent)
+    }
+
+    private fun showLogoutDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("Logout")
+            .setMessage("Apakah Anda yakin ingin logout?")
+            .setPositiveButton("Logout") { dialog, _ ->
+                logout()
+                dialog.dismiss()
+            }
+            .setNegativeButton("Batal") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+    }
+
+    private fun logout() {
+        // Hapus session
+        sessionManager.logout()
+
+        Toast.makeText(this, "Berhasil logout", Toast.LENGTH_SHORT).show()
+
+        // Redirect ke LoginActivity
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
     }
 }

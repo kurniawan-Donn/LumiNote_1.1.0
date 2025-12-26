@@ -31,32 +31,30 @@
                 app:srcCompat="@drawable/ic_panah" />
 
             <TextView android:id="@+id/textViewProfil"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Profil"
-            android:textColor="#2C3E50"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Profil"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
-
-            <com.google.android.material.button.MaterialButton
+            <!-- Ganti MaterialButton dengan Button biasa -->
+            <Button
                 android:id="@+id/btnEdit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="12dp"
                 android:text="Edit"
                 android:textAllCaps="false"
-                app:backgroundTint="@android:color/white"
-                android:textColor="#2C3E50"
+                android:backgroundTint="@android:color/white"
+                android:textColor="@color/text_primary"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            />
-
+                app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -84,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:text="Someone"
-                android:textColor="#2C3E50"
+                android:textColor="@color/text_primary"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -103,14 +101,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-
                 android:padding="16dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Bio"
-                    android:textColor="#2C3E50"
+                    android:textColor="@color/text_primary"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -120,7 +117,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:text="Deskripsi Bio..."
-                    android:textColor="#9AA6B2"
+                    android:textColor="@color/text_secondary"
                     android:textSize="14sp" />
 
             </LinearLayout>
@@ -149,11 +146,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
                     android:text="Menu"
-                    android:textColor="#2C3E50"
+                    android:textColor="@color/text_primary"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
-                <!-- Fsforit -->
+                <!-- Faforit -->
                 <LinearLayout
                     android:id="@+id/layoutFsforit"
                     android:layout_width="match_parent"
@@ -166,7 +163,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_star"
-                        app:tint="#2C3E50" />
+                        app:tint="@color/text_primary" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -174,14 +171,14 @@
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
                         android:text="Faforit"
-                        android:textColor="#2C3E50"
+                        android:textColor="@color/text_primary"
                         android:textSize="16sp" />
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_chevron_right"
-                        app:tint="#9AA6B2" />
+                        app:tint="@color/text_secondary" />
 
                 </LinearLayout>
 
@@ -198,7 +195,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_archive"
-                        app:tint="#2C3E50" />
+                        app:tint="@color/text_primary" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -206,14 +203,14 @@
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
                         android:text="Arsip"
-                        android:textColor="#2C3E50"
+                        android:textColor="@color/text_primary"
                         android:textSize="16sp" />
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_chevron_right"
-                        app:tint="#9AA6B2" />
+                        app:tint="@color/text_secondary" />
 
                 </LinearLayout>
 
@@ -230,7 +227,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_chart"
-                        app:tint="#2C3E50" />
+                        app:tint="@color/text_primary" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -238,14 +235,14 @@
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
                         android:text="Statistik"
-                        android:textColor="#2C3E50"
+                        android:textColor="@color/text_primary"
                         android:textSize="16sp" />
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_chevron_right"
-                        app:tint="#9AA6B2" />
+                        app:tint="@color/text_secondary" />
 
                 </LinearLayout>
 
@@ -275,7 +272,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
                     android:text="Pengaturan"
-                    android:textColor="#2C3E50"
+                    android:textColor="@color/text_primary"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -289,8 +286,8 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_dark_mode" />
-
+                        android:src="@drawable/ic_dark_mode"
+                        app:tint="@color/text_primary" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -298,7 +295,7 @@
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
                         android:text="Mode Gelap"
-                        android:textColor="#2C3E50"
+                        android:textColor="@color/text_primary"
                         android:textSize="16sp" />
 
                     <androidx.appcompat.widget.SwitchCompat
@@ -306,7 +303,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:thumbTint="#FFFFFF"
-                        app:trackTint="#BCCCDC" />
+                        app:trackTint="@color/bottom_nav_color" />
 
                 </LinearLayout>
 
@@ -321,7 +318,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_notification"
-                        app:tint="#2C3E50" />
+                        app:tint="@color/text_primary" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -329,7 +326,7 @@
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
                         android:text="Pemberitahuan"
-                        android:textColor="#2C3E50"
+                        android:textColor="@color/text_primary"
                         android:textSize="16sp" />
 
                     <androidx.appcompat.widget.SwitchCompat
@@ -337,7 +334,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:thumbTint="#FFFFFF"
-                        app:trackTint="#BCCCDC" />
+                        app:trackTint="@color/bottom_nav_color" />
 
                 </LinearLayout>
 
@@ -354,7 +351,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_language"
-                        app:tint="#2C3E50" />
+                        app:tint="@color/text_primary" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -362,7 +359,7 @@
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
                         android:text="Bahasa Aplikasi"
-                        android:textColor="#2C3E50"
+                        android:textColor="@color/text_primary"
                         android:textSize="16sp" />
 
                     <TextView
@@ -371,14 +368,14 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:text="Indonesia"
-                        android:textColor="#9AA6B2"
+                        android:textColor="@color/text_secondary"
                         android:textSize="14sp" />
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_chevron_right"
-                        app:tint="#9AA6B2" />
+                        app:tint="@color/text_secondary" />
 
                 </LinearLayout>
 
@@ -408,7 +405,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
                     android:text="Tentang Aplikasi"
-                    android:textColor="#2C3E50"
+                    android:textColor="@color/text_primary"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -425,7 +422,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_backup"
-                        app:tint="#2C3E50" />
+                        app:tint="@color/text_primary" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -433,14 +430,14 @@
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
                         android:text="Cadangkan &amp; Pulihkan"
-                        android:textColor="#2C3E50"
+                        android:textColor="@color/text_primary"
                         android:textSize="16sp" />
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_chevron_right"
-                        app:tint="#9AA6B2" />
+                        app:tint="@color/text_secondary" />
 
                 </LinearLayout>
 
@@ -457,7 +454,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_reset"
-                        app:tint="#2C3E50" />
+                        app:tint="@color/text_primary" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -465,14 +462,14 @@
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
                         android:text="Hapus Data"
-                        android:textColor="#2C3E50"
+                        android:textColor="@color/text_primary"
                         android:textSize="16sp" />
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_chevron_right"
-                        app:tint="#9AA6B2" />
+                        app:tint="@color/text_secondary" />
 
                 </LinearLayout>
 
@@ -489,7 +486,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_info"
-                        app:tint="#2C3E50" />
+                        app:tint="@color/text_primary" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -497,14 +494,48 @@
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
                         android:text="Tentang Kami"
-                        android:textColor="#2C3E50"
+                        android:textColor="@color/text_primary"
                         android:textSize="16sp" />
 
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_chevron_right"
-                        app:tint="#9AA6B2" />
+                        app:tint="@color/text_secondary" />
+
+                </LinearLayout>
+
+                <!-- Logout -->
+                <LinearLayout
+                    android:id="@+id/layoutLogout"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_panah"
+                        android:rotation="180"
+                        app:tint="#f87171" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:text="Logout"
+                        android:textColor="#f87171"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_chevron_right"
+                        app:tint="#f87171" />
 
                 </LinearLayout>
 

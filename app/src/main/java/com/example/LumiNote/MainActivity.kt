@@ -17,9 +17,22 @@ class MainActivity : AppCompatActivity() {
     private lateinit var fab: FloatingActionButton
     private lateinit var mainHeader: TextView
     private lateinit var btnToProfil: ImageButton
+    private lateinit var sessionManager: SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // ✅ CEK SESSION DULU SEBELUM LOAD LAYOUT
+        sessionManager = SessionManager(this)
+        if (!sessionManager.isLoggedIn()) {
+            // Jika belum login, redirect ke LoginActivity
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+            return
+        }
+
         setContentView(R.layout.activity_main)
 
         // Inisialisasi views
@@ -32,7 +45,15 @@ class MainActivity : AppCompatActivity() {
         setupFab()
         setupBottomNavListener()
         setupBackPressHandler()
-        setupProfileButton() // ✅ TAMBAHAN BARU
+        setupProfileButton()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        // ✅ Logout otomatis saat aplikasi ditutup
+        if (isFinishing) {
+            sessionManager.logout()
+        }
     }
 
     private fun setupNavigation() {

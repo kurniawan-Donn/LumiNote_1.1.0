@@ -4,61 +4,89 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
 
-        <!-- Header Navigation -->
-        <string name="header_catatan">Daftar Catatan</string>
-        <string name="header_tugas">Daftar Tugas</string>
+    <!-- Header Navigation -->
+    <string name="header_catatan">Daftar Catatan</string>
+    <string name="header_tugas">Daftar Tugas</string>
 
-        <!-- Bottom Navigation -->
-        <string name="title_catatan">Catatan</string>
-        <string name="title_plus">Plus</string>
-        <string name="title_tugas">Tugas</string>
+    <!-- Bottom Navigation -->
+    <string name="title_catatan">Catatan</string>
+    <string name="title_plus">Plus</string>
+    <string name="title_tugas">Tugas</string>
 
-        <!-- Fragment Catatan -->
-        <string name="daftar_catatan">Daftar Catatan</string>
-        <string name="cari_catatan">Cari Catatan</string>
+    <!-- Fragment Catatan -->
+    <string name="daftar_catatan">Daftar Catatan</string>
+    <string name="cari_catatan">Cari Catatan</string>
 
-        <!-- Fragment Tugas -->
-        <string name="daftar_tugas">Daftar Tugas</string>
-        <string name="cari_tugas">Cari Tugas</string>
+    <!-- Fragment Tugas -->
+    <string name="daftar_tugas">Daftar Tugas</string>
+    <string name="cari_tugas">Cari Tugas</string>
 
-        <!-- Tambah Catatan -->
-        <string name="catatan_baru">Catatan baru</string>
-        <string name="judul_catatan">Judul Catatan</string>
-        <string name="masukkan_judul">Masukkan judul</string>
-        <string name="deskripsi">Deskripsi</string>
-        <string name="isi_deskripsi">Isi deskripsi</string>
-        <string name="tanggal_waktu_opsional">Tanggal &amp; Waktu (opsional)</string>
-        <string name="pilih_tanggal">Pilih tanggal</string>
-        <string name="pilih_waktu">Pilih waktu</string>
-        <string name="tidak_ada_tanggal">Tidak ada tanggal - tidak ada notifikasi</string>
-        <string name="lanjut">Lanjut</string>
-        <string name="tambah">tambahkan</string>
-        <string name="tambah_catatan">Tambah Catatan</string>
+    <!-- Tambah Catatan -->
+    <string name="catatan_baru">Catatan baru</string>
+    <string name="judul_catatan">Judul Catatan</string>
+    <string name="masukkan_judul">Masukkan judul</string>
+    <string name="deskripsi">Deskripsi</string>
+    <string name="isi_deskripsi">Isi deskripsi</string>
+    <string name="tanggal_waktu_opsional">Tanggal &amp; Waktu (opsional)</string>
+    <string name="pilih_tanggal">Pilih tanggal</string>
+    <string name="pilih_waktu">Pilih waktu</string>
+    <string name="tidak_ada_tanggal">Tidak ada tanggal - tidak ada notifikasi</string>
+    <string name="lanjut">Lanjut</string>
+    <string name="tambah">tambahkan</string>
+    <string name="tambah_catatan">Tambah Catatan</string>
 
+    <!-- Tambah Tugas -->
+    <string name="tambah_tugas">Tambah Tugas</string>
+    <string name="tugas_baru">Tugas baru</string>
+    <string name="judul_tugas">Judul Tugas</string>
+    <string name="tugas">Tugas</string>
+    <string name="batas_waktu">Batas Waktu</string>
+    <string name="simpan">Simpan</string>
 
+    <!-- Dialog -->
+    <string name="menambahkan">Menambahkan</string>
+    <string name="catatan">Catatan</string>
+    <string name="tugas_text">Tugas</string>
 
-        <!-- Tambah Tugas -->
-        <string name="tambah_tugas">Tambah Tugas</string>
-        <string name="tugas_baru">Tugas baru</string>
-        <string name="judul_tugas">Judul Tugas</string>
-        <string name="tugas">Tugas</string>
-        <string name="batas_waktu">Batas Waktu</string>
-        <string name="simpan">Simpan</string>
+    <!-- Menu -->
+    <string name="edit">Edit</string>
+    <string name="hapus">Hapus</string>
 
+    <!-- Hints -->
+    <string name="deskripsi_hint">• Deskripsi</string>
 
+    <!-- ✅ TAMBAHAN BARU: Login & Register -->
+    <string name="login">Masuk</string>
+    <string name="register">Daftar</string>
+    <string name="id_nama">ID Nama</string>
+    <string name="password">Password</string>
+    <string name="konfirmasi_password">Konfirmasi Password</string>
+    <string name="lupa_password">Lupa Password?</string>
+    <string name="belum_punya_akun">Belum punya akun?</string>
+    <string name="sudah_punya_akun">Sudah punya akun?</string>
+    <string name="masuk_ke_akun">Masuk ke Akun Anda</string>
+    <string name="daftar_akun_baru">Daftar Akun Baru</string>
 
+    <!-- ✅ TAMBAHAN BARU: Profile -->
+    <string name="profil">Profil</string>
+    <string name="edit_profil">Edit Profil</string>
+    <string name="nama">Nama</string>
+    <string name="bio">Bio</string>
+    <string name="faforit">Faforit</string>
+    <string name="arsip">Arsip</string>
+    <string name="statistik">Statistik</string>
+    <string name="mode_gelap">Mode Gelap</string>
+    <string name="pemberitahuan">Pemberitahuan</string>
+    <string name="bahasa_aplikasi">Bahasa Aplikasi</string>
+    <string name="backup_restore">Cadangkan &amp; Pulihkan</string>
+    <string name="hapus_data">Hapus Data</string>
+    <string name="tentang_kami">Tentang Kami</string>
+    <string name="simpan_perubahan">Simpan Perubahan</string>
+    <string name="batal">Batal</string>
 
-
-
-        <!-- Dialog -->
-        <string name="menambahkan">Menambahkan</string>
-        <string name="catatan">Catatan</string>
-        <string name="tugas_text">Tugas</string>
-
-        <!-- Menu -->
-        <string name="edit">Edit</string>
-        <string name="hapus">Hapus</string>
-
-        <!-- Hints -->
-        <string name="deskripsi_hint">• Deskripsi</string>
+    <!-- ✅ TAMBAHAN BARU: Messages -->
+    <string name="login_berhasil">Login berhasil!</string>
+    <string name="registrasi_berhasil">Registrasi berhasil!</string>
+    <string name="password_reset_berhasil">Password berhasil direset!</string>
+    <string name="profil_diperbarui">Profil berhasil diperbarui</string>
 </resources>
