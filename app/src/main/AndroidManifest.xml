@@ -101,6 +101,17 @@
                 android:value=".ProfilActivity" />
         </activity>
 
+        <!-- ✅ Arsip Activity -->
+        <activity
+            android:name=".ArsipActivity"
+            android:exported="false"
+            android:parentActivityName=".ProfilActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ProfilActivity" />
+        </activity>
+
     </application>
 
 </manifest>
