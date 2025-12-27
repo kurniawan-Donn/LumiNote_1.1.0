@@ -27,7 +27,7 @@
             android:layout_width="160dp"
             android:layout_height="60dp"
             android:layout_marginBottom="16dp"
-            android:backgroundTint="#757de8"
+            android:backgroundTint="#f87171"
             android:text="Batal"
             android:textAllCaps="false"
             android:textColor="#000000"
@@ -43,7 +43,7 @@
             android:id="@+id/btnYa"
             android:layout_width="160dp"
             android:layout_height="60dp"
-            android:backgroundTint="#f87171"
+            android:backgroundTint="#757de8"
             android:text="Ya"
             android:textAllCaps="false"
             android:textColor="#000000"
@@ -63,6 +63,7 @@
             android:src="@drawable/man_image"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:contentDescription="orang yang lagi nunjuk pilihan batal atau ya dengan ekpresi lucu"
             app:layout_constraintStart_toStartOf="@+id/btnBatal"
             app:layout_constraintTop_toTopOf="parent" />
 
