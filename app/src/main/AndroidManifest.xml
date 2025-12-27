@@ -90,7 +90,7 @@
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
-        <!-- ✅ Faforit Activity -->
+        <!-- Faforit Activity -->
         <activity
             android:name=".FaforitActivity"
             android:exported="false"
@@ -101,7 +101,7 @@
                 android:value=".ProfilActivity" />
         </activity>
 
-        <!-- ✅ Arsip Activity -->
+        <!-- Arsip Activity -->
         <activity
             android:name=".ArsipActivity"
             android:exported="false"
@@ -111,6 +111,49 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ProfilActivity" />
         </activity>
+
+        <!-- Statistik Activity -->
+        <activity
+            android:name=".StatistikActivity"
+            android:exported="false"
+            android:parentActivityName=".ProfilActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ProfilActivity" />
+        </activity>
+
+        <!-- Backup & Restore Activity - BARU DITAMBAHKAN -->
+        <activity
+            android:name=".BackupRestoreActivity"
+            android:exported="false"
+            android:parentActivityName=".ProfilActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ProfilActivity" />
+        </activity>
+
+        <activity
+            android:name=".TentangKamiActivity"
+            android:exported="false"
+            android:parentActivityName=".ProfilActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ProfilActivity" />
+        </activity>
+
+        <!-- Provider juga sejajar -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
 
     </application>
 
