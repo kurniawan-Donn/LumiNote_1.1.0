@@ -90,6 +90,17 @@
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
+        <!-- ✅ Faforit Activity -->
+        <activity
+            android:name=".FaforitActivity"
+            android:exported="false"
+            android:parentActivityName=".ProfilActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ProfilActivity" />
+        </activity>
+
     </application>
 
 </manifest>
