@@ -13,7 +13,8 @@ class TugasAdapter(
     private val onEditClick: (Tugas) -> Unit,
     private val onDeleteClick: (Tugas) -> Unit,
     private val onCheckedChange: (Tugas, Boolean) -> Unit,
-    private val onFavoritClick: ((Tugas) -> Unit)? = null // ✅ TAMBAHAN: Callback favorit
+    private val onFavoritClick: ((Tugas) -> Unit)? = null,
+    private val onArsipClick: ((Tugas) -> Unit)? = null // ✅ TAMBAHAN: Callback arsip
 ) : RecyclerView.Adapter<TugasAdapter.TugasViewHolder>() {
 
     class TugasViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -23,7 +24,8 @@ class TugasAdapter(
         val tanggal: TextView = itemView.findViewById(R.id.tgltugas)
         val btnEdit: ImageView = itemView.findViewById(R.id.ic_edit_tugas)
         val btnHapus: ImageView = itemView.findViewById(R.id.ic_hapus_tugas)
-        val favoritIcon: ImageView = itemView.findViewById(R.id.ic_favorit_tugas) // ✅ TAMBAHAN
+        val favoritIcon: ImageView = itemView.findViewById(R.id.ic_favorit_tugas)
+        val kartuTugas = itemView.findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.kartutugas) // ✅ TAMBAHAN
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TugasViewHolder {
@@ -55,11 +57,22 @@ class TugasAdapter(
             onCheckedChange(tugas, isChecked)
         }
 
-        // ✅ TAMBAHAN: Set icon favorit
-        if (tugas.isFavorit) {
-            holder.favoritIcon.setImageResource(R.drawable.ic_star_in) // Bintang penuh
-        } else {
-            holder.favoritIcon.setImageResource(R.drawable.ic_star) // Bintang kosong
+        // ✅ TAMBAHAN: Set icon favorit dengan warna
+        try {
+            if (tugas.isFavorit) {
+                holder.favoritIcon.setImageResource(R.drawable.ic_star_in) // Bintang penuh
+                holder.favoritIcon.setColorFilter(
+                    holder.favoritIcon.context.getColor(android.R.color.holo_orange_light)
+                ) // Warna kuning/orange
+            } else {
+                holder.favoritIcon.setImageResource(R.drawable.ic_star) // Bintang kosong
+                holder.favoritIcon.setColorFilter(
+                    holder.favoritIcon.context.getColor(android.R.color.darker_gray)
+                ) // Warna abu-abu
+            }
+        } catch (e: Exception) {
+            // Jika field isFavorit belum ada di data class, pakai default
+            holder.favoritIcon.setImageResource(R.drawable.ic_star)
         }
 
         holder.btnEdit.setOnClickListener {
@@ -73,6 +86,12 @@ class TugasAdapter(
         // ✅ TAMBAHAN: Handle klik favorit
         holder.favoritIcon.setOnClickListener {
             onFavoritClick?.invoke(tugas)
+        }
+
+        // ✅ TAMBAHAN: Long press untuk arsip
+        holder.kartuTugas.setOnLongClickListener {
+            onArsipClick?.invoke(tugas)
+            true
         }
     }
 

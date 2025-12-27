@@ -14,7 +14,8 @@ class CatatanAdapter(
     private val onItemClick: (Catatan) -> Unit,
     private val onEditClick: (Catatan) -> Unit,
     private val onDeleteClick: (Catatan) -> Unit,
-    private val onFavoritClick: ((Catatan) -> Unit)? = null // ✅ TAMBAHAN: Callback favorit
+    private val onFavoritClick: ((Catatan) -> Unit)? = null,
+    private val onArsipClick: ((Catatan) -> Unit)? = null // ✅ TAMBAHAN: Callback arsip
 ) : RecyclerView.Adapter<CatatanAdapter.CatatanViewHolder>() {
 
     class CatatanViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -61,15 +62,27 @@ class CatatanAdapter(
         val waktu = if (!catatan.waktu.isNullOrEmpty()) catatan.waktu else defaultWaktu
         holder.tanggalTextView.text = "$tanggal $waktu"
 
-        // ✅ TAMBAHAN: Set icon favorit
+        // ✅ TAMBAHAN: Set icon favorit dengan warna
         if (catatan.isFavorit) {
             holder.favoritIcon.setImageResource(R.drawable.ic_star_in) // Bintang penuh
+            holder.favoritIcon.setColorFilter(
+                holder.favoritIcon.context.getColor(android.R.color.holo_orange_light)
+            ) // Warna kuning/orange
         } else {
             holder.favoritIcon.setImageResource(R.drawable.ic_star) // Bintang kosong
+            holder.favoritIcon.setColorFilter(
+                holder.favoritIcon.context.getColor(android.R.color.darker_gray)
+            ) // Warna abu-abu
         }
 
         holder.kartuCatatan.setOnClickListener {
             onItemClick(catatan)
+        }
+
+        // ✅ TAMBAHAN: Long press 1.5 detik untuk arsip
+        holder.kartuCatatan.setOnLongClickListener {
+            onArsipClick?.invoke(catatan)
+            true
         }
 
         holder.editIcon.setOnClickListener {
