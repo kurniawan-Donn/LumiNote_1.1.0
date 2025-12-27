@@ -304,7 +304,7 @@ class ProfilActivity : AppCompatActivity() {
     }
 
     private fun openStatistik() {
-        Toast.makeText(this, "Statistik akan segera hadir 📊✨", Toast.LENGTH_SHORT).show() // ✅ DITAMBAHKAN EMOJI
+        startActivity(Intent(this, StatistikActivity::class.java))
     }
 
     private fun toggleModeGelap(isEnabled: Boolean) {
@@ -322,7 +322,7 @@ class ProfilActivity : AppCompatActivity() {
     }
 
     private fun openBackupRestore() {
-        Toast.makeText(this, "Backup & Restore akan segera hadir 💾✨", Toast.LENGTH_SHORT).show() // ✅ DITAMBAHKAN EMOJI
+        startActivity(Intent(this, BackupRestoreActivity::class.java))
     }
 
     private fun showHapusDataDialog() {
@@ -345,7 +345,7 @@ class ProfilActivity : AppCompatActivity() {
     }
 
     private fun openTentangKami() {
-        Toast.makeText(this, "Tentang Kami akan segera hadir ℹ️✨", Toast.LENGTH_SHORT).show() // ✅ DITAMBAHKAN EMOJI
+        startActivity(Intent(this, TentangKamiActivity::class.java))
     }
 
     private fun showLogoutDialog() {
