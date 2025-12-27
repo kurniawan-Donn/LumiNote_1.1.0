@@ -62,7 +62,7 @@ class ProfilActivity : AppCompatActivity() {
             loadUserData()
             setupListeners()
         } catch (e: Exception) {
-            Toast.makeText(this, "Error: ${e.message} 😥", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Error: ${e.message} 😅", Toast.LENGTH_LONG).show() // ✅ DITAMBAHKAN EMOJI
             e.printStackTrace()
         }
     }
@@ -70,6 +70,7 @@ class ProfilActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == EDIT_PROFILE_REQUEST && resultCode == Activity.RESULT_OK) {
+            Toast.makeText(this, "Profil berhasil diperbarui ✨", Toast.LENGTH_SHORT).show() // ✅ DITAMBAHKAN EMOJI
             loadUserData()
         }
     }
@@ -176,14 +177,14 @@ class ProfilActivity : AppCompatActivity() {
                         imgProfile.setImageResource(R.drawable.ic_person)
                     }
                 } else {
-                    Toast.makeText(this, "User tidak ditemukan 🤪", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "User tidak ditemukan 🧐", Toast.LENGTH_SHORT).show() // ✅ DITAMBAHKAN EMOJI
                 }
             } else {
-                Toast.makeText(this, "Session tidak valid 🫣", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Session tidak valid 🔄", Toast.LENGTH_SHORT).show() // ✅ DITAMBAHKAN EMOJI
                 finish()
             }
         } catch (e: Exception) {
-            Toast.makeText(this, "Error loading data: ${e.message} 😇", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Error loading data: ${e.message} 😅", Toast.LENGTH_LONG).show() // ✅ DITAMBAHKAN EMOJI
             e.printStackTrace()
         }
     }
@@ -288,7 +289,7 @@ class ProfilActivity : AppCompatActivity() {
             val intent = Intent(this, EditProfilActivity::class.java)
             startActivityForResult(intent, EDIT_PROFILE_REQUEST)
         } catch (e: Exception) {
-            Toast.makeText(this, "Error: ${e.message} 😇", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Error: ${e.message} 😅", Toast.LENGTH_SHORT).show() // ✅ DITAMBAHKAN EMOJI
         }
     }
 
@@ -298,62 +299,64 @@ class ProfilActivity : AppCompatActivity() {
     }
 
     private fun openArsip() {
-        Toast.makeText(this, "Arsip akan segera hadir", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, ArsipActivity::class.java)
+        startActivity(intent)
     }
 
     private fun openStatistik() {
-        Toast.makeText(this, "Statistik akan segera hadir", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Statistik akan segera hadir 📊✨", Toast.LENGTH_SHORT).show() // ✅ DITAMBAHKAN EMOJI
     }
 
     private fun toggleModeGelap(isEnabled: Boolean) {
-        val message = if (isEnabled) "Mode Gelap diaktifkan" else "Mode Gelap dinonaktifkan"
+        val message = if (isEnabled) "Mode Gelap diaktifkan 🌙✨" else "Mode Terang diaktifkan ☀️✨" // ✅ DITAMBAHKAN EMOJI
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun togglePemberitahuan(isEnabled: Boolean) {
-        val message = if (isEnabled) "Pemberitahuan diaktifkan" else "Pemberitahuan dinonaktifkan"
+        val message = if (isEnabled) "Pemberitahuan diaktifkan 🔔✅" else "Pemberitahuan dinonaktifkan 🔕❌" // ✅ DITAMBAHKAN EMOJI
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun showBahasaBottomSheet() {
-        Toast.makeText(this, "Pilih Bahasa akan segera hadir", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Pilih Bahasa akan segera hadir 🌍✨", Toast.LENGTH_SHORT).show() // ✅ DITAMBAHKAN EMOJI
     }
 
     private fun openBackupRestore() {
-        Toast.makeText(this, "Backup & Restore akan segera hadir", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Backup & Restore akan segera hadir 💾✨", Toast.LENGTH_SHORT).show() // ✅ DITAMBAHKAN EMOJI
     }
 
     private fun showHapusDataDialog() {
         AlertDialog.Builder(this)
-            .setTitle("Hapus Data")
-            .setMessage("Apakah Anda yakin ingin menghapus semua data? Tindakan ini tidak dapat dibatalkan.")
-            .setPositiveButton("Hapus") { dialog, _ ->
+            .setTitle("Hapus Data 🗑️😱") // ✅ DITAMBAHKAN EMOJI
+            .setMessage("Apakah Anda yakin ingin menghapus semua data? 🤔\nTindakan ini tidak dapat dibatalkan! ⚠️") // ✅ DITAMBAHKAN EMOJI
+            .setPositiveButton("Hapus Semua 🔥") { dialog, _ -> // ✅ DITAMBAHKAN EMOJI
                 hapusSemuaData()
                 dialog.dismiss()
             }
-            .setNegativeButton("Batal") { dialog, _ ->
+            .setNegativeButton("Jangan! 😅") { dialog, _ -> // ✅ DITAMBAHKAN EMOJI
                 dialog.dismiss()
             }
             .show()
     }
 
     private fun hapusSemuaData() {
-        Toast.makeText(this, "Semua data telah dihapus", Toast.LENGTH_SHORT).show()
+        // Implementasi hapus data di sini
+        Toast.makeText(this, "Semua data telah dihapus 🗑️✨", Toast.LENGTH_SHORT).show() // ✅ DITAMBAHKAN EMOJI
     }
 
     private fun openTentangKami() {
-        Toast.makeText(this, "Tentang Kami akan segera hadir", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Tentang Kami akan segera hadir ℹ️✨", Toast.LENGTH_SHORT).show() // ✅ DITAMBAHKAN EMOJI
     }
 
     private fun showLogoutDialog() {
         AlertDialog.Builder(this)
-            .setTitle("Logout")
-            .setMessage("Apakah Anda yakin ingin logout 😭😩😩?")
-            .setPositiveButton("Logout 😥") { dialog, _ ->
+            .setTitle("Logout 🚪😊") // ✅ DITAMBAHKAN EMOJI
+            .setMessage("Apakah Anda yakin ingin logout? 🤔\nJangan lupa kembali ya! 👋") // ✅ DITAMBAHKAN EMOJI
+            .setPositiveButton("Logout 👋") { dialog, _ -> // ✅ DITAMBAHKAN EMOJI
                 logout()
                 dialog.dismiss()
             }
-            .setNegativeButton("Batal 😊") { dialog, _ ->
+            .setNegativeButton("Tetap di Sini 😊") { dialog, _ -> // ✅ DITAMBAHKAN EMOJI
                 dialog.dismiss()
             }
             .show()
@@ -363,7 +366,7 @@ class ProfilActivity : AppCompatActivity() {
         // Hapus session
         sessionManager.logout()
 
-        Toast.makeText(this, "Berhasil logout 🥲😟", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Berhasil logout 👋✨", Toast.LENGTH_SHORT).show() // ✅ DITAMBAHKAN EMOJI
 
         // Redirect ke LoginActivity
         val intent = Intent(this, LoginActivity::class.java)
