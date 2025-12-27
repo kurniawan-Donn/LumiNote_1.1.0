@@ -29,7 +29,7 @@ class TentangKamiActivity : AppCompatActivity() {
     private val githubUrl = "https://github.com/kurniawan-Donn/LumiNote_1.1.0"
     private val whatsappNumber = "+6282133237136"
     private val instagramUsername = "kurniawandony7"
-    private val emailAddress = "Dkk138@gmail.com"
+    private val emailAddress = "donykurniawan1298@gmail.com"
 
     // APK Info
     private val apkDownloadUrl = "https://github.com/kurniawan-Donn/LumiNote_1.1.0/releases/download/v1.1.0/LumiNote-v1.1.0.apk"
@@ -104,7 +104,7 @@ class TentangKamiActivity : AppCompatActivity() {
     private fun openWhatsApp() {
         try {
             // Format pesan default
-            val message = "P Don info Ngopi Bolo. Ghassshh 🍵🍵 "
+            val message = "Hallo!  Info Ngopi Bolo Ghassh 🍵🍵 "
             val encodedMessage = Uri.encode(message)
 
             // Coba buka WhatsApp langsung

@@ -62,7 +62,7 @@ class ProfilActivity : AppCompatActivity() {
             loadUserData()
             setupListeners()
         } catch (e: Exception) {
-            Toast.makeText(this, "Error: ${e.message} 😅", Toast.LENGTH_LONG).show() // ✅ DITAMBAHKAN EMOJI
+            Toast.makeText(this, "Error: ${e.message} 😅", Toast.LENGTH_LONG).show()
             e.printStackTrace()
         }
     }
@@ -70,7 +70,7 @@ class ProfilActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == EDIT_PROFILE_REQUEST && resultCode == Activity.RESULT_OK) {
-            Toast.makeText(this, "Profil berhasil diperbarui ✨", Toast.LENGTH_SHORT).show() // ✅ DITAMBAHKAN EMOJI
+            Toast.makeText(this, "Profil berhasil diperbarui ✨", Toast.LENGTH_SHORT).show()
             loadUserData()
         }
     }
@@ -177,19 +177,18 @@ class ProfilActivity : AppCompatActivity() {
                         imgProfile.setImageResource(R.drawable.ic_person)
                     }
                 } else {
-                    Toast.makeText(this, "User tidak ditemukan 🧐", Toast.LENGTH_SHORT).show() // ✅ DITAMBAHKAN EMOJI
+                    Toast.makeText(this, "User tidak ditemukan 🧐", Toast.LENGTH_SHORT).show()
                 }
             } else {
-                Toast.makeText(this, "Session tidak valid 🔄", Toast.LENGTH_SHORT).show() // ✅ DITAMBAHKAN EMOJI
+                Toast.makeText(this, "Session tidak valid 🔄", Toast.LENGTH_SHORT).show()
                 finish()
             }
         } catch (e: Exception) {
-            Toast.makeText(this, "Error loading data: ${e.message} 😅", Toast.LENGTH_LONG).show() // ✅ DITAMBAHKAN EMOJI
+            Toast.makeText(this, "Error loading data: ${e.message} 😅", Toast.LENGTH_LONG).show()
             e.printStackTrace()
         }
     }
 
-    // ✅ Load image dari internal storage (file path)
     private fun loadImageFromInternalStorage(filePath: String) {
         try {
             val bitmap = ImageHelper.loadImageFromInternalStorage(filePath)
@@ -206,7 +205,6 @@ class ProfilActivity : AppCompatActivity() {
         }
     }
 
-    // ✅ Fungsi native untuk load dan crop circular image dari URI (untuk preview)
     private fun loadCircularImageFromUri(uriString: String) {
         try {
             val uri = Uri.parse(uriString)
@@ -232,7 +230,6 @@ class ProfilActivity : AppCompatActivity() {
         }
     }
 
-    // Fungsi untuk rotate image sesuai EXIF
     private fun rotateImageIfRequired(bitmap: Bitmap, uri: Uri): Bitmap {
         try {
             val inputStream = contentResolver.openInputStream(uri)
@@ -261,7 +258,6 @@ class ProfilActivity : AppCompatActivity() {
         return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
     }
 
-    // Fungsi untuk membuat circular bitmap
     private fun getCircularBitmap(bitmap: Bitmap): Bitmap {
         val size = Math.min(bitmap.width, bitmap.height)
         val x = (bitmap.width - size) / 2
@@ -289,7 +285,7 @@ class ProfilActivity : AppCompatActivity() {
             val intent = Intent(this, EditProfilActivity::class.java)
             startActivityForResult(intent, EDIT_PROFILE_REQUEST)
         } catch (e: Exception) {
-            Toast.makeText(this, "Error: ${e.message} 😅", Toast.LENGTH_SHORT).show() // ✅ DITAMBAHKAN EMOJI
+            Toast.makeText(this, "Error: ${e.message} 😅", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -303,46 +299,176 @@ class ProfilActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    // ✅ FIXED: Langsung start activity, tidak perlu set listener lagi
     private fun openStatistik() {
         startActivity(Intent(this, StatistikActivity::class.java))
     }
 
     private fun toggleModeGelap(isEnabled: Boolean) {
-        val message = if (isEnabled) "Mode Gelap diaktifkan 🌙✨" else "Mode Terang diaktifkan ☀️✨" // ✅ DITAMBAHKAN EMOJI
+        val message = if (isEnabled) "Mode Gelap diaktifkan 🌙✨" else "Mode Terang diaktifkan ☀️✨"
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun togglePemberitahuan(isEnabled: Boolean) {
-        val message = if (isEnabled) "Pemberitahuan diaktifkan 🔔✅" else "Pemberitahuan dinonaktifkan 🔕❌" // ✅ DITAMBAHKAN EMOJI
+        val message = if (isEnabled) "Pemberitahuan diaktifkan 🔔✅" else "Pemberitahuan dinonaktifkan 🔕❌"
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun showBahasaBottomSheet() {
-        Toast.makeText(this, "Pilih Bahasa akan segera hadir 🌍✨", Toast.LENGTH_SHORT).show() // ✅ DITAMBAHKAN EMOJI
+        Toast.makeText(this, "Pilih Bahasa akan segera hadir 🌍✨", Toast.LENGTH_SHORT).show()
     }
 
     private fun openBackupRestore() {
         startActivity(Intent(this, BackupRestoreActivity::class.java))
     }
 
+    // =====================================
+// HAPUS DATA - Tambahkan ke ProfilActivity.kt
+// =====================================
+
+// Ganti method showHapusDataDialog() yang sudah ada dengan ini:
+
     private fun showHapusDataDialog() {
-        AlertDialog.Builder(this)
-            .setTitle("Hapus Data 🗑️😱") // ✅ DITAMBAHKAN EMOJI
-            .setMessage("Apakah Anda yakin ingin menghapus semua data? 🤔\nTindakan ini tidak dapat dibatalkan! ⚠️") // ✅ DITAMBAHKAN EMOJI
-            .setPositiveButton("Hapus Semua 🔥") { dialog, _ -> // ✅ DITAMBAHKAN EMOJI
+        try {
+            // Inflate custom dialog layout
+            val dialogView = layoutInflater.inflate(R.layout.dialog_hapus_data, null)
+
+            // Create dialog
+            val dialog = AlertDialog.Builder(this)
+                .setView(dialogView)
+                .setCancelable(true)
+                .create()
+
+            // Make dialog background transparent (untuk rounded corners)
+            dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+            // Get views from dialog
+            val tvTitle = dialogView.findViewById<TextView>(R.id.tvTitle)
+            val btnBatal = dialogView.findViewById<Button>(R.id.btnBatal)
+            val btnYa = dialogView.findViewById<Button>(R.id.btnYa)
+            val ivIllustration = dialogView.findViewById<ImageView>(R.id.ivIllustration)
+
+            // Set title dengan emoji
+            tvTitle.text = "Anda Yakin Ingin Menghapus Data Aplikasi? 🗑️"
+
+            // Button Batal - dismiss dialog
+            btnBatal.setOnClickListener {
+                dialog.dismiss()
+                Toast.makeText(this, "Penghapusan dibatalkan 😅", Toast.LENGTH_SHORT).show()
+            }
+
+            // Button Ya - hapus data
+            btnYa.setOnClickListener {
+                dialog.dismiss()
                 hapusSemuaData()
+            }
+
+            // Show dialog
+            dialog.show()
+
+        } catch (e: Exception) {
+            Toast.makeText(this, "Error dialog: ${e.message}", Toast.LENGTH_LONG).show()
+            e.printStackTrace()
+        }
+    }
+
+    // Method untuk hapus semua data dengan tracking detail
+    private fun hapusSemuaData() {
+        try {
+            // Ambil jumlah data SEBELUM dihapus
+            val catatanPrefs = CatatanPreferences(this)
+            val jumlahCatatan = catatanPrefs.getCatatanList().size
+
+            val tugasPrefs = TugasPreferences(this)
+            val jumlahTugas = tugasPrefs.getAllTugas().size
+
+            val arsipPrefs = ArsipPreferences(this)
+            val jumlahArsipCatatan = arsipPrefs.getArsipCatatan().size
+            val jumlahArsipTugas = arsipPrefs.getArsipTugas().size
+
+            // HAPUS DATA
+            catatanPrefs.saveCatatanList(emptyList())
+            tugasPrefs.saveList(emptyList())
+            arsipPrefs.saveArsipCatatan(emptyList())
+            arsipPrefs.saveArsipTugas(emptyList())
+
+            // Hapus info backup terakhir
+            //  val backupPrefs = BackupPreferences(this)
+            //  backupPrefs.saveLastBackupDate("")
+
+            // Hitung total
+            val totalDihapus = jumlahCatatan + jumlahTugas + jumlahArsipCatatan + jumlahArsipTugas
+
+            // Tampilkan hasil sesuai yang terhapus
+            showHapusDataSuccessDialog(
+                total = totalDihapus,
+                catatan = jumlahCatatan,
+                tugas = jumlahTugas,
+                arsipCatatan = jumlahArsipCatatan,
+                arsipTugas = jumlahArsipTugas
+            )
+
+        } catch (e: Exception) {
+            Toast.makeText(this, "Gagal menghapus data: ${e.message}", Toast.LENGTH_LONG).show()
+            e.printStackTrace()
+        }
+    }
+
+    // Dialog konfirmasi berhasil dengan detail dinamis
+    private fun showHapusDataSuccessDialog(
+        total: Int,
+        catatan: Int,
+        tugas: Int,
+        arsipCatatan: Int,
+        arsipTugas: Int
+    ) {
+        // Jika tidak ada data yang dihapus
+        if (total == 0) {
+            AlertDialog.Builder(this)
+                .setTitle("Tidak Ada Data 🤔")
+                .setMessage("Tidak ada data yang perlu dihapus.\nAplikasi sudah bersih! ✨")
+                .setPositiveButton("Oke! 👍") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .setCancelable(false)
+                .show()
+            return
+        }
+
+        // Build pesan dinamis berdasarkan apa yang terhapus
+        val message = buildString {
+            append("Total $total item telah dihapus:\n\n")
+
+            if (catatan > 0) {
+                append("• $catatan Catatan\n")
+            }
+
+            if (tugas > 0) {
+                append("• $tugas Tugas\n")
+            }
+
+            if (arsipCatatan > 0) {
+                append("• $arsipCatatan Arsip Catatan\n")
+            }
+
+            if (arsipTugas > 0) {
+                append("• $arsipTugas Arsip Tugas\n")
+            }
+
+            append("\nAplikasi siap untuk digunakan kembali! 🎉")
+        }
+
+        AlertDialog.Builder(this)
+            .setTitle("Data Berhasil Dihapus! 🗑️✨")
+            .setMessage(message)
+            .setPositiveButton("Oke! 👍") { dialog, _ ->
                 dialog.dismiss()
             }
-            .setNegativeButton("Jangan! 😅") { dialog, _ -> // ✅ DITAMBAHKAN EMOJI
-                dialog.dismiss()
-            }
+            .setCancelable(false)
             .show()
     }
 
-    private fun hapusSemuaData() {
-        // Implementasi hapus data di sini
-        Toast.makeText(this, "Semua data telah dihapus 🗑️✨", Toast.LENGTH_SHORT).show() // ✅ DITAMBAHKAN EMOJI
-    }
+
 
     private fun openTentangKami() {
         startActivity(Intent(this, TentangKamiActivity::class.java))
@@ -350,13 +476,13 @@ class ProfilActivity : AppCompatActivity() {
 
     private fun showLogoutDialog() {
         AlertDialog.Builder(this)
-            .setTitle("Logout 🚪😊") // ✅ DITAMBAHKAN EMOJI
-            .setMessage("Apakah Anda yakin ingin logout? 🤔\nJangan lupa kembali ya! 👋") // ✅ DITAMBAHKAN EMOJI
-            .setPositiveButton("Logout 👋") { dialog, _ -> // ✅ DITAMBAHKAN EMOJI
+            .setTitle("Logout 🚪😊")
+            .setMessage("Apakah Anda yakin ingin logout? 🤔\nJangan lupa kembali ya! 👋")
+            .setPositiveButton("Logout 👋") { dialog, _ ->
                 logout()
                 dialog.dismiss()
             }
-            .setNegativeButton("Tetap di Sini 😊") { dialog, _ -> // ✅ DITAMBAHKAN EMOJI
+            .setNegativeButton("Tetap di Sini 😊") { dialog, _ ->
                 dialog.dismiss()
             }
             .show()
@@ -366,7 +492,7 @@ class ProfilActivity : AppCompatActivity() {
         // Hapus session
         sessionManager.logout()
 
-        Toast.makeText(this, "Berhasil logout 👋✨", Toast.LENGTH_SHORT).show() // ✅ DITAMBAHKAN EMOJI
+        Toast.makeText(this, "Berhasil logout 👋✨", Toast.LENGTH_SHORT).show()
 
         // Redirect ke LoginActivity
         val intent = Intent(this, LoginActivity::class.java)
