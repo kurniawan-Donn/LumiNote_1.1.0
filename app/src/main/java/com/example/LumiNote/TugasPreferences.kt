@@ -113,9 +113,9 @@ class TugasPreferences(context: Context) {
     // ===============================
     // Simpan list ke SharedPreferences (private method)
     // ===============================
-    private fun saveList(list: List<Tugas>) {
-        // Mengonversi List<Tugas> menjadi string JSON menggunakan Gson
+    fun saveList(list: List<Tugas>) {
         val json = gson.toJson(list)
+        prefs.edit().putString(KEY_TUGAS_LIST, json).apply()
 
         // Membuka editor untuk mengubah SharedPreferences
         // apply(): menyimpan perubahan secara asynchronous (lebih cepat dari commit())
