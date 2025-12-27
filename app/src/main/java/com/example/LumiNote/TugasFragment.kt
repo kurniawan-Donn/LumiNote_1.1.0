@@ -28,7 +28,8 @@ class TugasFragment : Fragment() {
     private lateinit var rvTugas: RecyclerView
     private lateinit var etSearch: EditText
     private lateinit var tugasPreferences: TugasPreferences
-    private lateinit var faforitPreferences: FaforitPreferences // ✅ TAMBAHAN
+    private lateinit var faforitPreferences: FaforitPreferences
+    private lateinit var arsipPreferences: ArsipPreferences // ✅ TAMBAHAN
     private lateinit var tugasAdapter: TugasAdapter
 
     private var tampilkanTugasSelesai = true
@@ -45,7 +46,8 @@ class TugasFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         tugasPreferences = TugasPreferences(requireContext())
-        faforitPreferences = FaforitPreferences(requireContext()) // ✅ TAMBAHAN
+        faforitPreferences = FaforitPreferences(requireContext())
+        arsipPreferences = ArsipPreferences(requireContext()) // ✅ TAMBAHAN
 
         layoutTugasSelesai = view.findViewById(R.id.layout_tugas_selesai)
         icDiselesaikan = view.findViewById(R.id.ic_diselesaikan)
@@ -70,8 +72,11 @@ class TugasFragment : Fragment() {
             onEditClick = { tugas -> openEditTugas(tugas) },
             onDeleteClick = { tugas -> deleteTugas(tugas) },
             onCheckedChange = { tugas, isChecked -> updateStatusTugas(tugas, isChecked) },
-            onFavoritClick = { tugas -> // ✅ TAMBAHAN: Callback favorit
+            onFavoritClick = { tugas ->
                 toggleFavorit(tugas)
+            },
+            onArsipClick = { tugas -> // ✅ TAMBAHAN: Callback arsip
+                showArsipDialog(tugas)
             }
         )
 
@@ -87,8 +92,11 @@ class TugasFragment : Fragment() {
             onEditClick = { tugas -> openEditTugas(tugas) },
             onDeleteClick = { tugas -> deleteTugas(tugas) },
             onCheckedChange = { tugas, isChecked -> updateStatusTugas(tugas, isChecked) },
-            onFavoritClick = { tugas -> // ✅ TAMBAHAN: Callback favorit
+            onFavoritClick = { tugas ->
                 toggleFavorit(tugas)
+            },
+            onArsipClick = { tugas -> // ✅ TAMBAHAN: Callback arsip
+                showArsipDialog(tugas)
             }
         )
 
@@ -136,13 +144,16 @@ class TugasFragment : Fragment() {
     private fun loadData() {
         val allTugas = tugasPreferences.getAllTugas()
 
-        // ✅ TAMBAHAN: Update status favorit dari FaforitPreferences
-        allTugas.forEach { tugas ->
+        // ✅ Filter: Jangan tampilkan yang sudah diarsipkan
+        val tugasAktif = allTugas.filter { !arsipPreferences.isTugasArsip(it.id) }
+
+        // Update status favorit dari FaforitPreferences
+        tugasAktif.forEach { tugas ->
             tugas.isFavorit = faforitPreferences.isTugasFavorit(tugas.id)
         }
 
-        val belumSelesai = allTugas.filter { !it.isSelesai }
-        val selesai = allTugas.filter { it.isSelesai }
+        val belumSelesai = tugasAktif.filter { !it.isSelesai }
+        val selesai = tugasAktif.filter { it.isSelesai }
 
         tugasAdapter.updateData(belumSelesai)
         tugasSelesaiAdapter.updateData(selesai)
@@ -193,9 +204,9 @@ class TugasFragment : Fragment() {
 
         // Tampilkan pesan
         val message = if (tugas.isFavorit) {
-            "Ditambahkan ke favorit 🤪"
+            "Ditambahkan ke favorit"
         } else {
-            "Dihapus dari favorit 😭😭"
+            "Dihapus dari favorit"
         }
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
@@ -213,9 +224,9 @@ class TugasFragment : Fragment() {
 
     private fun deleteTugas(tugas: Tugas) {
         androidx.appcompat.app.AlertDialog.Builder(requireContext())
-            .setTitle("Hapus Tugas 🥺")
-            .setMessage("Apakah Anda yakin ingin menghapus \"${tugas.judul}\"🥲? ")
-            .setPositiveButton("Hapus 😟") { _, _ ->
+            .setTitle("Hapus Tugas")
+            .setMessage("Apakah Anda yakin ingin menghapus \"${tugas.judul}\"?")
+            .setPositiveButton("Hapus") { _, _ ->
                 tugasPreferences.deleteTugas(tugas.id)
                 // ✅ TAMBAHAN: Hapus juga dari favorit jika ada
                 if (faforitPreferences.isTugasFavorit(tugas.id)) {
@@ -223,7 +234,7 @@ class TugasFragment : Fragment() {
                 }
                 loadData()
             }
-            .setNegativeButton("Batal 😊", null)
+            .setNegativeButton("Batal", null)
             .show()
     }
 
@@ -236,5 +247,19 @@ class TugasFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         loadData()
+    }
+
+    // ✅ TAMBAHAN: Dialog konfirmasi arsip
+    private fun showArsipDialog(tugas: Tugas) {
+        androidx.appcompat.app.AlertDialog.Builder(requireContext())
+            .setTitle("Arsipkan Tugas")
+            .setMessage("Apakah Anda yakin ingin mengarsipkan \"${tugas.judul}\"?")
+            .setPositiveButton("Arsipkan") { _, _ ->
+                arsipPreferences.arsipkanTugas(tugas.id)
+                Toast.makeText(requireContext(), "Tugas diarsipkan", Toast.LENGTH_SHORT).show()
+                loadData()
+            }
+            .setNegativeButton("Batal", null)
+            .show()
     }
 }

@@ -17,7 +17,8 @@ import androidx.recyclerview.widget.RecyclerView
 class CatatanFragment : Fragment() {
 
     private lateinit var preferences: CatatanPreferences
-    private lateinit var faforitPreferences: FaforitPreferences // ✅ TAMBAHAN
+    private lateinit var faforitPreferences: FaforitPreferences
+    private lateinit var arsipPreferences: ArsipPreferences // ✅ TAMBAHAN
     private lateinit var adapter: CatatanAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var searchEditText: EditText
@@ -35,7 +36,8 @@ class CatatanFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         preferences = CatatanPreferences(requireContext())
-        faforitPreferences = FaforitPreferences(requireContext()) // ✅ TAMBAHAN
+        faforitPreferences = FaforitPreferences(requireContext())
+        arsipPreferences = ArsipPreferences(requireContext()) // ✅ TAMBAHAN
 
         recyclerView = view.findViewById(R.id.rv_catatan)
         searchEditText = view.findViewById(R.id.et_search)
@@ -76,8 +78,11 @@ class CatatanFragment : Fragment() {
             onDeleteClick = { catatan ->
                 showDeleteConfirmation(catatan)
             },
-            onFavoritClick = { catatan -> // ✅ TAMBAHAN: Callback favorit
+            onFavoritClick = { catatan ->
                 toggleFavorit(catatan)
+            },
+            onArsipClick = { catatan -> // ✅ TAMBAHAN: Callback arsip
+                showArsipDialog(catatan)
             }
         )
 
@@ -101,7 +106,10 @@ class CatatanFragment : Fragment() {
         // Ambil semua catatan
         allCatatan = preferences.getCatatanList().sortedByDescending { it.timestamp }
 
-        // ✅ TAMBAHAN: Update status favorit dari FaforitPreferences
+        // ✅ Filter: Jangan tampilkan yang sudah diarsipkan
+        allCatatan = allCatatan.filter { !arsipPreferences.isCatatanArsip(it.id) }
+
+        // Update status favorit dari FaforitPreferences
         allCatatan.forEach { catatan ->
             catatan.isFavorit = faforitPreferences.isCatatanFavorit(catatan.id)
         }
@@ -130,18 +138,18 @@ class CatatanFragment : Fragment() {
 
         // Tampilkan pesan
         val message = if (catatan.isFavorit) {
-            "Ditambahkan ke favorit 🤪"
+            "Ditambahkan ke favorit"
         } else {
-            "Dihapus dari favorit 🥺"
+            "Dihapus dari favorit"
         }
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     private fun showDeleteConfirmation(catatan: Catatan) {
         AlertDialog.Builder(requireContext())
-            .setTitle("Hapus Catatan 😟")
-            .setMessage("Apakah Anda yakin ingin menghapus \"${catatan.judul}\" 🥺?")
-            .setPositiveButton("Hapus 🫣") { _, _ ->
+            .setTitle("Hapus Catatan")
+            .setMessage("Apakah Anda yakin ingin menghapus \"${catatan.judul}\"?")
+            .setPositiveButton("Hapus") { _, _ ->
                 preferences.deleteCatatan(catatan.id)
                 // ✅ TAMBAHAN: Hapus juga dari favorit jika ada
                 if (faforitPreferences.isCatatanFavorit(catatan.id)) {
@@ -149,7 +157,21 @@ class CatatanFragment : Fragment() {
                 }
                 loadData()
             }
-            .setNegativeButton("Batal 😊", null)
+            .setNegativeButton("Batal", null)
+            .show()
+    }
+
+    // ✅ TAMBAHAN: Dialog konfirmasi arsip
+    private fun showArsipDialog(catatan: Catatan) {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Arsipkan Catatan")
+            .setMessage("Apakah Anda yakin ingin mengarsipkan \"${catatan.judul}\"?")
+            .setPositiveButton("Arsipkan") { _, _ ->
+                arsipPreferences.arsipkanCatatan(catatan.id)
+                Toast.makeText(requireContext(), "Catatan diarsipkan", Toast.LENGTH_SHORT).show()
+                loadData()
+            }
+            .setNegativeButton("Batal", null)
             .show()
     }
 }
