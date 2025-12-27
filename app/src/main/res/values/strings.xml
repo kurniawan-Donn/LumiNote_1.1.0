@@ -89,4 +89,10 @@
     <string name="registrasi_berhasil">Registrasi berhasil!</string>
     <string name="password_reset_berhasil">Password berhasil direset!</string>
     <string name="profil_diperbarui">Profil berhasil diperbarui</string>
+
+
+
+    <!-- activity tentang kami-->
+    <string name="my_username_ig">@kurniawandony7</string>
 </resources>
+
