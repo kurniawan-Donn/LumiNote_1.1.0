@@ -195,17 +195,17 @@ class TambahTugasActivity : AppCompatActivity() {
             // Validasi input
             // ===============================
             if (judul.isEmpty()) {
-                Toast.makeText(this, "Judul tidak boleh kosong", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Judul tidak boleh kosong 😥", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener // Keluar dari fungsi jika validasi gagal
             }
 
             if (isiTugas.isEmpty()) {
-                Toast.makeText(this, "Isi tugas tidak boleh kosong", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Isi tugas tidak boleh kosong 🥲", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
             if (selectedTanggal.isNullOrEmpty() || selectedWaktu.isNullOrEmpty()) {
-                Toast.makeText(this, "Tanggal dan waktu harus diisi", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Tanggal dan waktu harus diisi 🤪", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -234,7 +234,7 @@ class TambahTugasActivity : AppCompatActivity() {
 
                 // Update data tugas di penyimpanan lokal
                 tugasPreferences.updateTugas(tugasUpdate)
-                Toast.makeText(this, "Tugas berhasil diupdate", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Tugas berhasil diupdate ✨✨", Toast.LENGTH_SHORT).show()
 
             } else {
                 // ===============================
@@ -252,7 +252,7 @@ class TambahTugasActivity : AppCompatActivity() {
 
                 // Simpan tugas baru ke penyimpanan lokal
                 tugasPreferences.addTugas(tugasBaru)
-                Toast.makeText(this, "Tugas berhasil disimpan", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Tugas berhasil disimpan 🎉🎉", Toast.LENGTH_SHORT).show()
             }
 
             // Kembali ke activity sebelumnya (TugasFragment)

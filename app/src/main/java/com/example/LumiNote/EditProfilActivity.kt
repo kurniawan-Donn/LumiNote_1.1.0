@@ -253,24 +253,24 @@ class EditProfilActivity : AppCompatActivity() {
         // Validasi ID Nama (jika diubah)
         if (idNamaBaru != currentUser.idNama) {
             if (idNamaBaru.length < 4) {
-                Toast.makeText(this, "ID Nama minimal 4 karakter", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "ID Nama minimal 4 karakter 😤", Toast.LENGTH_SHORT).show()
                 return
             }
 
             if (!idNamaBaru.matches(Regex("^[a-z0-9]+$"))) {
-                Toast.makeText(this, "ID Nama hanya boleh huruf kecil dan angka", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "ID Nama hanya boleh huruf kecil dan angka 🥺", Toast.LENGTH_SHORT).show()
                 return
             }
 
             if (userManager.isIdExists(idNamaBaru)) {
-                Toast.makeText(this, "ID Nama sudah digunakan", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "ID Nama sudah digunakan 🤫", Toast.LENGTH_SHORT).show()
                 return
             }
         }
 
         // Validasi Password
         if (passwordBaru.length < 5) {
-            Toast.makeText(this, "Password minimal 5 karakter", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Password minimal 5 karakter 🤪", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -311,7 +311,7 @@ class EditProfilActivity : AppCompatActivity() {
             userManager.updateUser(currentUser)
         }
 
-        Toast.makeText(this, "Profil berhasil diperbarui", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Profil berhasil diperbarui 🛠", Toast.LENGTH_SHORT).show()
 
         // Kembali ke ProfilActivity
         setResult(RESULT_OK)

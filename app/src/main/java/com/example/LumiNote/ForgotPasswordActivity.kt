@@ -90,33 +90,33 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
         // Validasi
         if (idNama.isEmpty()) {
-            Toast.makeText(this, "ID Nama tidak boleh kosong", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "ID Nama tidak boleh kosong 🤪", Toast.LENGTH_SHORT).show()
             return
         }
 
         if (passwordBaru.isEmpty()) {
-            Toast.makeText(this, "Password baru tidak boleh kosong", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Password baru tidak boleh kosong 🤪", Toast.LENGTH_SHORT).show()
             return
         }
 
         if (passwordBaru.length < 12) {
-            Toast.makeText(this, "Password minimal 12 karakter", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Password minimal 12 karakter 🥺", Toast.LENGTH_SHORT).show()
             return
         }
 
         if (konfirmasiPassword.isEmpty()) {
-            Toast.makeText(this, "Konfirmasi Password tidak boleh kosong", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Konfirmasi Password tidak boleh kosong 😤", Toast.LENGTH_SHORT).show()
             return
         }
 
         if (passwordBaru != konfirmasiPassword) {
-            Toast.makeText(this, "Password dan Konfirmasi Password tidak cocok", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Password dan Konfirmasi Password tidak cocok 🫣", Toast.LENGTH_SHORT).show()
             return
         }
 
         // Cek apakah ID Nama ada
         if (!userManager.isIdExists(idNama)) {
-            Toast.makeText(this, "ID Nama tidak ditemukan", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "ID Nama tidak ditemukan 🫣", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -124,10 +124,10 @@ class ForgotPasswordActivity : AppCompatActivity() {
         val success = userManager.resetPassword(idNama, passwordBaru)
 
         if (success) {
-            Toast.makeText(this, "Password berhasil direset! Silakan login", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Password berhasil direset! Silakan login 🎉", Toast.LENGTH_SHORT).show()
             finish()
         } else {
-            Toast.makeText(this, "Reset password gagal. Silakan coba lagi", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Reset password gagal. Silakan coba lagi 🥺", Toast.LENGTH_SHORT).show()
         }
     }
 }

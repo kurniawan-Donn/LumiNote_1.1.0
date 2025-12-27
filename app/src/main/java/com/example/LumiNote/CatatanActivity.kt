@@ -172,13 +172,13 @@ class CatatanActivity : AppCompatActivity() {
         // Cek apakah judul kosong atau null
         if (judul.isNullOrEmpty()) {
             // Tampilkan pesan toast jika judul kosong
-            Toast.makeText(this, "Judul tidak boleh kosong", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Judul tidak boleh kosong🤪", Toast.LENGTH_SHORT).show()
             return // Keluar dari fungsi tanpa menyimpan
         }
         // Cek apakah isi catatan kosong
         if (isiCatatan.isEmpty()) {
             // Tampilkan pesan toast jika isi catatan kosong
-            Toast.makeText(this, "Isi catatan tidak boleh kosong", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Isi catatan tidak boleh kosong🤪", Toast.LENGTH_SHORT).show()
             return // Keluar dari fungsi tanpa menyimpan
         }
 
@@ -197,12 +197,12 @@ class CatatanActivity : AppCompatActivity() {
             // Mode EDIT: update catatan yang sudah ada
             catatanPreferences.updateCatatan(catatan)
             // Tampilkan pesan sukses update
-            Toast.makeText(this, "Catatan berhasil diupdate", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Catatan berhasil diupdate🎉🎉", Toast.LENGTH_SHORT).show()
         } else {
             // Mode TAMBAH BARU: tambahkan catatan baru
             catatanPreferences.addCatatan(catatan)
             // Tampilkan pesan sukses simpan
-            Toast.makeText(this, "Catatan berhasil disimpan", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Catatan berhasil disimpan🎉🎉", Toast.LENGTH_SHORT).show()
         }
 
         // Tutup aktivitas dan kembali ke layar sebelumnya

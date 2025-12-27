@@ -86,12 +86,12 @@ class LoginActivity : AppCompatActivity() {
 
         // Validasi input
         if (idNama.isEmpty()) {
-            Toast.makeText(this, "ID Nama tidak boleh kosong", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "ID Nama tidak boleh kosong 🤪", Toast.LENGTH_SHORT).show()
             return
         }
 
         if (password.isEmpty()) {
-            Toast.makeText(this, "Password tidak boleh kosong", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Password tidak boleh kosong 🤪", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -101,7 +101,7 @@ class LoginActivity : AppCompatActivity() {
         if (user != null) {
             // Login berhasil
             sessionManager.createLoginSession(idNama)
-            Toast.makeText(this, "Login berhasil! Selamat datang ${user.nama}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Login berhasil! Selamat datang ${user.nama} ✨✨", Toast.LENGTH_SHORT).show()
 
             val intent = Intent(this, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -109,7 +109,7 @@ class LoginActivity : AppCompatActivity() {
             finish()
         } else {
             // Login gagal
-            Toast.makeText(this, "ID Nama atau Password salah", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "ID Nama atau Password salah 🥺", Toast.LENGTH_SHORT).show()
         }
     }
 }

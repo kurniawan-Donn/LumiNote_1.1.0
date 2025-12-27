@@ -62,7 +62,7 @@ class ProfilActivity : AppCompatActivity() {
             loadUserData()
             setupListeners()
         } catch (e: Exception) {
-            Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Error: ${e.message} 😥", Toast.LENGTH_LONG).show()
             e.printStackTrace()
         }
     }
@@ -176,14 +176,14 @@ class ProfilActivity : AppCompatActivity() {
                         imgProfile.setImageResource(R.drawable.ic_person)
                     }
                 } else {
-                    Toast.makeText(this, "User tidak ditemukan", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "User tidak ditemukan 🤪", Toast.LENGTH_SHORT).show()
                 }
             } else {
-                Toast.makeText(this, "Session tidak valid", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Session tidak valid 🫣", Toast.LENGTH_SHORT).show()
                 finish()
             }
         } catch (e: Exception) {
-            Toast.makeText(this, "Error loading data: ${e.message}", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Error loading data: ${e.message} 😇", Toast.LENGTH_LONG).show()
             e.printStackTrace()
         }
     }
@@ -288,12 +288,13 @@ class ProfilActivity : AppCompatActivity() {
             val intent = Intent(this, EditProfilActivity::class.java)
             startActivityForResult(intent, EDIT_PROFILE_REQUEST)
         } catch (e: Exception) {
-            Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Error: ${e.message} 😇", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun openFaforit() {
-        Toast.makeText(this, "Faforit akan segera hadir", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, FaforitActivity::class.java)
+        startActivity(intent)
     }
 
     private fun openArsip() {
@@ -347,12 +348,12 @@ class ProfilActivity : AppCompatActivity() {
     private fun showLogoutDialog() {
         AlertDialog.Builder(this)
             .setTitle("Logout")
-            .setMessage("Apakah Anda yakin ingin logout?")
-            .setPositiveButton("Logout") { dialog, _ ->
+            .setMessage("Apakah Anda yakin ingin logout 😭😩😩?")
+            .setPositiveButton("Logout 😥") { dialog, _ ->
                 logout()
                 dialog.dismiss()
             }
-            .setNegativeButton("Batal") { dialog, _ ->
+            .setNegativeButton("Batal 😊") { dialog, _ ->
                 dialog.dismiss()
             }
             .show()
@@ -362,7 +363,7 @@ class ProfilActivity : AppCompatActivity() {
         // Hapus session
         sessionManager.logout()
 
-        Toast.makeText(this, "Berhasil logout", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Berhasil logout 🥲😟", Toast.LENGTH_SHORT).show()
 
         // Redirect ke LoginActivity
         val intent = Intent(this, LoginActivity::class.java)

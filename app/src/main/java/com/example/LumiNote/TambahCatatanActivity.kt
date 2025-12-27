@@ -157,7 +157,7 @@ class TambahCatatanActivity : AppCompatActivity() {  // Mendefinisikan class act
             // VALIDASI INPUT
             // ===============================
             if (judul.isEmpty()) {  // Jika judul kosong
-                Toast.makeText(this, "Judul tidak boleh kosong", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Judul tidak boleh kosong 😥", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener  // Hentikan eksekusi, tampilkan pesan error
             }
 
@@ -177,7 +177,7 @@ class TambahCatatanActivity : AppCompatActivity() {  // Mendefinisikan class act
                     timestamp = System.currentTimeMillis()  // Update timestamp ke waktu sekarang
                 )
                 catatanPref.updateCatatan(catatanUpdate)  // Menyimpan update ke preferences
-                Toast.makeText(this, "Catatan berhasil diupdate", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Catatan berhasil diupdate 🎉🎉", Toast.LENGTH_SHORT).show()
                 finish()  // Menutup activity dan kembali ke sebelumnya
             }
             // ===============================

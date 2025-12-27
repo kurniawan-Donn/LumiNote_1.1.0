@@ -1,107 +1,106 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginHorizontal="12dp"
     android:layout_marginVertical="6dp"
-    app:cardBackgroundColor="@color/card_color"
-    app:cardCornerRadius="20dp"
-    app:cardElevation="4dp">
+    app:cardBackgroundColor="#DDEBFA"
+    app:cardCornerRadius="25dp"
+    app:cardElevation="2dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/kartutugas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp">
+        android:padding="16dp">
 
         <CheckBox
             android:id="@+id/centang"
-            android:layout_width="43dp"
-            android:layout_height="43dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-        <!-- LinearLayout untuk Judul, Deskripsi, Tanggal -->
-        <LinearLayout
-            android:id="@+id/layoutkartutugas"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingStart="0dp"
-            android:paddingEnd="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/ic_edit_tugas"
-            app:layout_constraintStart_toEndOf="@+id/centang"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0">
-
-            <!-- Judul -->
-            <TextView
-                android:id="@+id/tugas_judul"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="JudulTugas"
-                android:textColor="@android:color/black"
-                android:fontFamily="@font/interbold"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:maxLines="1"/>
-
-            <!-- Deskripsi -->
-            <TextView
-                android:id="@+id/tugas_deskripsi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="isi Tugas"
-                android:fontFamily="@font/interbold"
-                android:textColor="@android:color/black"
-                android:textSize="14sp"
-                android:maxLines="1"/>
-
-            <!-- Tanggal -->
-
-        </LinearLayout>
 
         <TextView
-            android:id="@+id/tgltugas"
-            android:layout_width="wrap_content"
+            android:id="@+id/tugas_judul"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:text="12/12/2005"
-            android:fontFamily="@font/interbold"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="8dp"
+            android:text="Judul Tugas"
             android:textColor="@android:color/black"
-            android:textSize="11sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-        <!-- Icon Edit -->
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/ic_edit_tugas"
+            app:layout_constraintStart_toEndOf="@+id/centang"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tugas_deskripsi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Deskripsi"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/tugas_judul"
+            app:layout_constraintStart_toStartOf="@+id/tugas_judul"
+            app:layout_constraintTop_toBottomOf="@id/tugas_judul" />
+
         <ImageView
             android:id="@+id/ic_edit_tugas"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="8dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/edit"
-            android:padding="0dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="10dp"
             android:src="@drawable/ic_edit"
             app:layout_constraintEnd_toStartOf="@id/ic_hapus_tugas"
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@android:color/black" />
 
-        <!-- Icon Hapus -->
         <ImageView
             android:id="@+id/ic_hapus_tugas"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/hapus"
-            android:padding="0dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="10dp"
             android:src="@drawable/ic_delete"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/ic_favorit_tugas"
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@android:color/black" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/ic_favorit_tugas"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/ic_star"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/tgltugas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="22/12/2005"
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ic_favorit_tugas" />
+
+        <LinearLayout
+            android:id="@+id/layoutkartutugas"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
